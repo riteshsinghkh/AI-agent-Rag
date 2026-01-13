@@ -4,7 +4,15 @@ High-level interface for searching documents.
 """
 
 from typing import List, Dict
-from app.rag.embedding_factory import get_embedding_client
+
+# --- SAFE embedding backend check (REQUIRED CHANGE) ---
+try:
+    from app.rag.embedding_factory import get_embedding_client
+    _RAG_ENABLED = True
+except ImportError:
+    get_embedding_client = None
+    _RAG_ENABLED = False
+
 from app.rag.vectorstore import get_vector_store, VectorStore
 from app.rag.documents import load_and_chunk_documents
 
@@ -24,6 +32,10 @@ def initialize_rag(docs_dir: str = None, force_rebuild: bool = False) -> VectorS
     Returns:
         Initialized VectorStore instance
     """
+    # --- RAG disabled guard (REQUIRED CHANGE) ---
+    if not _RAG_ENABLED:
+        raise RuntimeError("RAG disabled: embedding backend not available")
+
     # Get embedding client first to determine dimension
     embedding_client = get_embedding_client()
     dimension = embedding_client.get_embedding_dimension()
@@ -83,6 +95,10 @@ def search_documents(query: str, top_k: int = None) -> List[Dict]:
         - source: Source filename
         - score: Similarity score (lower is better for L2)
     """
+    # --- RAG disabled guard (REQUIRED CHANGE) ---
+    if not _RAG_ENABLED:
+        return []
+
     top_k = top_k or DEFAULT_TOP_K
     
     vector_store = get_vector_store()
@@ -97,9 +113,6 @@ def search_documents(query: str, top_k: int = None) -> List[Dict]:
     embedding_client = get_embedding_client()
     query_embedding_array = embedding_client.embed_texts([query])
     query_embedding = query_embedding_array[0].tolist()  # Convert to list
-    
-    # Search
-    results = vector_store.search(query_embedding, top_k)
     
     # Search
     results = vector_store.search(query_embedding, top_k)
