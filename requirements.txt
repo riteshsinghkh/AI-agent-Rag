@@ -1,22 +1,25 @@
---index-url https://download.pytorch.org/whl/cpu
+# Use PyPI as default
+--extra-index-url https://download.pytorch.org/whl/cpu
 
 # Core Web Framework
 fastapi
 uvicorn[standard]
 pydantic
 
-# LLM / APIs
+# Environment
+python-dotenv
+
+# APIs
 openai
 requests
 huggingface_hub
-python-dotenv
 
-# RAG / Vector DB
+# Vector DB
 faiss-cpu
 
-# Embeddings (CPU only)
+# Embeddings (CPU-only, from PyTorch repo)
 torch==2.2.1
 sentence-transformers==2.2.2
 
-# Optional helpers
+# Optional
 accelerate
