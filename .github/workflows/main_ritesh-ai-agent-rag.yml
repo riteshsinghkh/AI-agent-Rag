@@ -1,6 +1,6 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+# Python + Azure App Service: https://aka.ms/python-webapps-actions
 
 name: Build and deploy Python app to Azure Web App - ritesh-ai-agent-rag
 
@@ -17,18 +17,23 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Python version
+      # Step 2: Set Python version (for compatibility only)
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       # IMPORTANT:
-      # Do NOT create virtualenv or install dependencies here.
-      # Azure App Service (Oryx) will handle pip install from requirements.txt.
+      # ❌ DO NOT create virtualenv
+      # ❌ DO NOT pip install here
+      # Azure App Service (Oryx) will install dependencies from requirements.txt
 
-      - name: Upload artifact for deployment jobs
+      # Step 3: Upload source code as artifact
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: python-app
@@ -39,14 +44,17 @@ jobs:
     needs: build
 
     steps:
-      - name: Download artifact from build job
+      # Step 4: Download build artifact
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: python-app
 
+      # Step 5: Deploy to Azure App Service using Publish Profile
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'ritesh-ai-agent-rag'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5311BB1E74AD43FFA074A8D74BDD567E }}
+          app-name: ritesh-ai-agent-rag
+          slot-name: Production
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: .
