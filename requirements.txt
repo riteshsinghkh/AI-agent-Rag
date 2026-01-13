@@ -1,15 +1,22 @@
+--index-url https://download.pytorch.org/whl/cpu
+
 # Core Web Framework
 fastapi
 uvicorn[standard]
 pydantic
-python-dotenv
 
-# LLM Providers (API-based, no local models)
+# LLM / APIs
 openai
 requests
 huggingface_hub
+python-dotenv
 
-# RAG Components (lightweight)
+# RAG / Vector DB
 faiss-cpu
-numpy
-scikit-learn
+
+# Embeddings (CPU only)
+torch==2.2.1
+sentence-transformers==2.2.2
+
+# Optional helpers
+accelerate
