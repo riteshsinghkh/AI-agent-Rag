@@ -1,8 +1,8 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# Python + Azure App Service: https://aka.ms/python-webapps-actions
+# Docs:
+# https://github.com/Azure/webapps-deploy
+# https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - ritesh-ai-agent-rag
+name: Build and Deploy Python App to Azure Web App - ritesh-ai-agent-rag
 
 on:
   push:
@@ -17,22 +17,27 @@ jobs:
       contents: read
 
     steps:
-      # Step 1: Checkout repository
+      # ---------------------------
+      # 1. Checkout Repository
+      # ---------------------------
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set Python version (for compatibility only)
-      - name: Set up Python
+      # ---------------------------
+      # 2. Setup Python (compatibility only)
+      # ---------------------------
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      # IMPORTANT:
-      # ❌ DO NOT create virtualenv
-      # ❌ DO NOT pip install here
-      # Azure App Service (Oryx) will install dependencies from requirements.txt
+      # ❌ DO NOT create venv
+      # ❌ DO NOT pip install
+      # Azure Oryx will handle dependencies from requirements.txt
 
-      # Step 3: Upload source code as artifact
+      # ---------------------------
+      # 3. Upload Source as Artifact
+      # ---------------------------
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
@@ -44,13 +49,18 @@ jobs:
     needs: build
 
     steps:
-      # Step 4: Download build artifact
+      # ---------------------------
+      # 4. Download Artifact
+      # ---------------------------
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: python-app
+          path: .
 
-      # Step 5: Deploy to Azure App Service using Publish Profile
+      # ---------------------------
+      # 5. Deploy to Azure App Service
+      # ---------------------------
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
