@@ -2,15 +2,14 @@
 fastapi
 uvicorn[standard]
 pydantic
+python-dotenv
 
-# LLM Providers
-openai  # Azure OpenAI SDK (primary provider)
-requests  # For Hugging Face API calls (fallback provider)
-huggingface_hub  # Hugging Face Inference API client (handles routing automatically)
+# LLM Providers (API-based, no local models)
+openai
+requests
+huggingface_hub
 
-# RAG Components
-faiss-cpu  # Vector database
-sentence-transformers  # Local embeddings (includes transformers and torch)
-accelerate  # For efficient local model loading
-python-dotenv  # Environment variables
-
+# RAG Components (lightweight)
+faiss-cpu
+numpy
+scikit-learn
