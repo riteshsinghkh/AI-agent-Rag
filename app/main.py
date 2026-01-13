@@ -70,11 +70,12 @@ This API provides an intelligent assistant that can:
     lifespan=lifespan
 )
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://wonderful-sky-0b2ff020f.1.azurestaticapps.net"],  # In production, specify allowed origins
-    allow_credentials=True,
+    allow_origins=[
+        "https://wonderful-sky-0b2ff020f.1.azurestaticapps.net"
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
