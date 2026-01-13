@@ -253,11 +253,10 @@
     </div>
 
     <script>
-        // Configuration
-        const API_URL = '/ask';  // Change this if your API is hosted elsewhere
+        // Configuration (ONLY THIS LINE CHANGED)
+        const API_URL = 'https://ritesh-ai-agent-rag.azurewebsites.net/ask';
         const SESSION_ID = 'user-' + Math.random().toString(36).substring(7);
 
-        // Add user message to chat
         function addUserMessage(message) {
             const chatArea = document.getElementById('chatArea');
             const welcome = document.querySelector('.welcome');
@@ -270,7 +269,6 @@
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        // Add agent message to chat
         function addAgentMessage(answer, sources = []) {
             const chatArea = document.getElementById('chatArea');
             const messageDiv = document.createElement('div');
@@ -289,7 +287,6 @@
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        // Add loading indicator
         function addLoadingMessage() {
             const chatArea = document.getElementById('chatArea');
             const messageDiv = document.createElement('div');
@@ -300,27 +297,23 @@
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        // Remove loading indicator
         function removeLoadingMessage() {
             const loadingMsg = document.getElementById('loadingMessage');
             if (loadingMsg) loadingMsg.remove();
         }
 
-        // Escape HTML to prevent XSS
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Handle Enter key press
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 askQuestion();
             }
         }
 
-        // Ask question to the API
         async function askQuestion() {
             const input = document.getElementById('questionInput');
             const button = document.getElementById('askButton');
@@ -328,28 +321,19 @@
 
             if (!question) return;
 
-            // Disable input
             input.disabled = true;
             button.disabled = true;
             button.textContent = 'Sending...';
 
-            // Add user message
             addUserMessage(question);
             input.value = '';
-
-            // Add loading indicator
             addLoadingMessage();
 
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        query: question,
-                        session_id: SESSION_ID
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: question, session_id: SESSION_ID })
                 });
 
                 removeLoadingMessage();
@@ -366,7 +350,6 @@
                 addAgentMessage('❌ Sorry, I encountered an error. Please try again.', []);
                 console.error('Error:', error);
             } finally {
-                // Re-enable input
                 input.disabled = false;
                 button.disabled = false;
                 button.textContent = 'Send';
@@ -374,13 +357,11 @@
             }
         }
 
-        // Ask example question
         function askExample(question) {
             document.getElementById('questionInput').value = question;
             askQuestion();
         }
 
-        // Focus input on load
         window.onload = () => {
             document.getElementById('questionInput').focus();
         };
