@@ -1,0 +1,605 @@
+================================================================================
+                        EXPENSE REIMBURSEMENT POLICY
+                              TechCorp Inc.
+                        Effective Date: January 2026
+                              Version 2.3
+================================================================================
+
+TABLE OF CONTENTS
+1. Purpose and Scope
+2. Eligible Expenses
+3. Non-Reimbursable Expenses
+4. Spending Limits and Authorization
+5. Submission Process
+6. Required Documentation
+7. Approval and Payment Timeline
+8. Corporate Credit Cards
+9. Travel Expenses
+10. Client Entertainment
+11. FAQ
+
+================================================================================
+1. PURPOSE AND SCOPE
+================================================================================
+
+This policy establishes guidelines for employee expense reimbursement to ensure:
+- Consistent and fair treatment of all employees
+- Proper use of company funds
+- Compliance with tax regulations and accounting standards
+- Timely reimbursement for legitimate business expenses
+
+This policy applies to all TechCorp employees, contractors, and authorized
+third parties who incur business-related expenses.
+
+Policy Owner: Finance Department
+Contact: expenses@techcorp.com | Extension: 5400
+
+================================================================================
+2. ELIGIBLE EXPENSES
+================================================================================
+
+TechCorp will reimburse reasonable business expenses incurred on behalf of
+the company. Expenses must be:
+
+- Necessary for business purposes
+- Reasonable in amount
+- Properly documented
+- Pre-approved when required
+- Submitted within 30 days of incurrence
+
+2.1 Common Eligible Expenses
+
+TRAVEL:
+✓ Airfare (economy class)
+✓ Ground transportation (taxi, rideshare, rental car)
+✓ Lodging (reasonable hotel rates)
+✓ Meals during business travel
+✓ Parking and tolls
+
+OFFICE SUPPLIES:
+✓ Stationery, pens, notebooks
+✓ Printer supplies
+✓ Office organization items
+✓ Basic desk accessories
+
+PROFESSIONAL DEVELOPMENT:
+✓ Conference registration fees
+✓ Professional memberships (job-related)
+✓ Training courses and certifications
+✓ Industry publications and books
+
+TECHNOLOGY:
+✓ Software subscriptions (approved)
+✓ Mobile phone (job-related usage)
+✓ Internet service (remote workers)
+✓ Peripherals and accessories (approved)
+
+CLIENT-RELATED:
+✓ Client meals and entertainment
+✓ Client gifts (within limits)
+✓ Meeting room rentals
+✓ Presentation materials
+
+MISCELLANEOUS:
+✓ Business mileage (personal vehicle)
+✓ Home office setup (remote workers, one-time)
+✓ Shipping and courier services
+✓ Bank fees for business transactions
+
+================================================================================
+3. NON-REIMBURSABLE EXPENSES
+================================================================================
+
+The following expenses will NOT be reimbursed:
+
+PERSONAL EXPENSES:
+✗ Personal meals (not during travel)
+✗ Personal shopping or entertainment
+✗ Personal phone calls (except brief check-ins)
+✗ Gym memberships or fitness
+✗ Personal grooming (haircuts, spa, etc.)
+✗ Commuting to regular office location
+
+EXCESSIVE OR LUXURY EXPENSES:
+✗ First-class or business-class airfare (unless pre-approved)
+✗ Luxury hotels (exceeding per diem rates)
+✗ Rental car upgrades (luxury or premium vehicles)
+✗ Excessive meals or alcohol
+✗ In-room movies or mini-bar charges
+
+PROHIBITED ITEMS:
+✗ Alcohol purchases (except client entertainment)
+✗ Tobacco products
+✗ Cannabis products
+✗ Weapons or ammunition
+✗ Gambling or lottery tickets
+✗ Political donations
+✗ Charitable donations (use company program instead)
+
+FINES AND PENALTIES:
+✗ Traffic tickets or parking violations
+✗ Late fees (credit card, bills)
+✗ Penalties for policy violations
+
+EXPENSES WITHOUT PROPER DOCUMENTATION:
+✗ Missing receipts
+✗ Incomplete expense reports
+✗ Expenses submitted after 90-day deadline
+
+================================================================================
+4. SPENDING LIMITS AND AUTHORIZATION
+================================================================================
+
+4.1 Per Diem Rates
+
+MEALS (per day while traveling):
+- Breakfast: $15
+- Lunch: $20
+- Dinner: $35
+- Total daily meal limit: $70
+
+Actual receipts not required for meals under per diem, but must be reasonable.
+Exceeding per diem requires manager approval and receipts.
+
+LODGING (per night):
+- Tier 1 cities (NYC, SF, LA, Seattle): $250
+- Tier 2 cities (Chicago, Boston, Austin): $200
+- Tier 3 cities (other major cities): $150
+- Tier 4 (small cities/towns): $100
+
+Exceeding lodging limits requires VP approval.
+
+4.2 Authorization Requirements
+
+PRE-APPROVAL REQUIRED:
+- Travel exceeding $1,000
+- Conference attendance
+- Client entertainment over $100
+- Technology purchases over $200
+- Any expense over $500
+
+MANAGER APPROVAL:
+- Up to $2,500 per expense
+
+DIRECTOR APPROVAL:
+- $2,501 - $10,000 per expense
+
+VP APPROVAL:
+- Over $10,000 per expense
+
+4.3 Corporate Card Limits
+
+Corporate credit card limits:
+- Individual Contributors: $5,000/month
+- Managers: $10,000/month
+- Directors: $25,000/month
+- VPs and above: $50,000/month
+
+Exceeding limits requires Finance approval.
+
+================================================================================
+5. SUBMISSION PROCESS
+================================================================================
+
+5.1 Expense Reporting System
+
+All expenses must be submitted through Concur Expense:
+https://concur.techcorp.com
+
+Step-by-Step Process:
+1. Log in to Concur
+2. Create new expense report
+3. Attach receipts (photo or PDF)
+4. Categorize each expense
+5. Add business purpose description
+6. Submit for approval
+7. Track status in Concur
+
+5.2 Submission Deadlines
+
+Expenses must be submitted:
+- Within 30 days of incurrence (preferred)
+- No later than 90 days of incurrence (hard deadline)
+- Before the 10th of the month following travel
+
+Late submissions require written justification and may be denied.
+
+5.3 Monthly Reconciliation
+
+Corporate card holders must:
+- Reconcile all charges monthly
+- Submit expense reports by month-end
+- Resolve discrepancies within 5 business days
+- Failure to reconcile may result in card suspension
+
+================================================================================
+6. REQUIRED DOCUMENTATION
+================================================================================
+
+6.1 Receipt Requirements
+
+RECEIPTS REQUIRED for:
+- All expenses over $25
+- All hotel charges (regardless of amount)
+- All airfare
+- All rental cars
+- Client entertainment (any amount)
+
+RECEIPT NOT REQUIRED for:
+- Parking meters under $25
+- Public transportation under $25
+- Per diem meals under daily limit
+
+6.2 Receipt Format
+
+Acceptable receipts must show:
+✓ Merchant name and location
+✓ Date of purchase
+✓ Itemized list of goods/services
+✓ Total amount paid
+✓ Payment method
+
+Acceptable formats:
+- Original receipt (photo)
+- Email receipt (PDF)
+- Digital receipt (screenshot)
+
+NOT acceptable:
+✗ Credit card statements alone
+✗ Handwritten notes
+✗ Illegible receipts
+✗ Altered receipts
+
+6.3 Lost Receipt Procedure
+
+If receipt is lost:
+1. Submit Lost Receipt Affidavit in Concur
+2. Provide credit card statement
+3. Write detailed explanation
+4. Manager must approve
+5. Limited to 3 lost receipts per year
+
+6.4 Additional Documentation
+
+For certain expenses, also provide:
+
+TRAVEL:
+- Trip itinerary
+- Business purpose
+- Names of attendees
+
+CLIENT ENTERTAINMENT:
+- Names and companies of attendees
+- Business purpose
+- Agenda or meeting notes
+
+CONFERENCE:
+- Conference agenda
+- Registration confirmation
+- Business justification
+
+MILEAGE:
+- Start and end locations
+- Odometer readings
+- Google Maps distance (for verification)
+
+================================================================================
+7. APPROVAL AND PAYMENT TIMELINE
+================================================================================
+
+7.1 Approval Workflow
+
+1. Employee submits expense report
+2. Manager reviews and approves (2 business days)
+3. Finance reviews for policy compliance (2 business days)
+4. Payment processed
+
+7.2 Payment Timeline
+
+DIRECT DEPOSIT (recommended):
+- Processed every Friday
+- Funds available within 2 business days
+- Must have direct deposit enrolled
+
+CHECK:
+- Processed monthly (1st and 15th)
+- Mailed to address on file
+- Allow 7-10 business days
+
+CORPORATE CARD PAYMENT:
+- Automatically paid from report approval
+- Appears on next card statement
+
+7.3 Delays and Rejections
+
+Reasons for delay or rejection:
+- Missing receipts
+- Incomplete information
+- Policy violations
+- Duplicate submissions
+- Missing pre-approvals
+
+Rejected expenses will be returned with explanation.
+Resubmit within 10 days with corrections.
+
+================================================================================
+8. CORPORATE CREDIT CARDS
+================================================================================
+
+8.1 Eligibility
+
+Corporate cards are issued to:
+- Managers and above (automatic)
+- Individual contributors with frequent travel (by request)
+- Project leads with client-facing roles
+
+Apply via Finance: expenses@techcorp.com
+
+8.2 Card Usage Rules
+
+ONLY use corporate card for:
+✓ Business travel
+✓ Client entertainment
+✓ Approved business purchases
+✓ Office supplies
+
+NEVER use corporate card for:
+✗ Personal expenses
+✗ Cash advances
+✗ Balance transfers
+✗ Non-business purchases
+
+8.3 Card Holder Responsibilities
+
+You must:
+- Reconcile charges monthly
+- Submit expense reports timely
+- Report lost/stolen cards immediately: (800) 555-CARD
+- Keep card secure
+- Review statements for fraud
+
+Failure to comply may result in:
+- Card suspension or cancellation
+- Repayment of unauthorized charges
+- Disciplinary action
+
+8.4 Lost or Stolen Cards
+
+If card is lost or stolen:
+1. Call card issuer immediately: (800) 555-CARD
+2. Notify Finance: expenses@techcorp.com
+3. Complete Lost Card Report
+4. New card will be issued within 3 business days
+
+You are not liable for fraudulent charges reported promptly.
+
+================================================================================
+9. TRAVEL EXPENSES
+================================================================================
+
+9.1 Airfare
+
+Guidelines:
+- Book economy class for flights under 5 hours
+- Book 14+ days in advance when possible
+- Use preferred airlines (United, Delta, American)
+- Book through Concur Travel or approved agency
+
+Business class requires:
+- VP approval
+- Flights over 5 hours international
+- Medical necessity (with documentation)
+
+9.2 Ground Transportation
+
+PREFERRED OPTIONS:
+1. Public transportation (most economical)
+2. Rideshare (Uber, Lyft)
+3. Taxi
+4. Rental car (if cost-effective)
+
+RENTAL CARS:
+- Mid-size or smaller
+- Decline insurance (covered by company policy)
+- Refuel before return
+- Economy or Compact class preferred
+
+PERSONAL VEHICLE:
+- Reimbursed at IRS rate: $0.67/mile (2026)
+- Must be most economical option
+- Insurance coverage: driver's responsibility
+
+9.3 Lodging
+
+Guidelines:
+- Stay within per diem rates (see Section 4.1)
+- Book through Concur Travel when possible
+- Preferred hotels: Marriott, Hilton, Hyatt
+- Stay close to business location to minimize transportation
+
+Acceptable hotel expenses:
+✓ Room rate
+✓ Taxes and fees
+✓ Wi-Fi (if not included)
+✓ Business calls
+
+NOT reimbursable:
+✗ Mini-bar
+✗ In-room movies
+✗ Spa services
+✗ Room service (unless no other dining option)
+✗ Late checkout fees
+
+9.4 Meals During Travel
+
+Per Diem Option:
+- Receive $70/day without receipts
+- No need to itemize
+- Available for trips 1+ days
+
+Actual Expense Option:
+- Submit actual meal costs with receipts
+- Must be reasonable
+- Cannot exceed per diem rates without approval
+
+Alcohol:
+- Limited to $15/day
+- Only with client entertainment or team dinners
+- Excessive alcohol will not be reimbursed
+
+9.5 Extended Travel
+
+For trips exceeding 30 days:
+- Weekly return home flights may be reimbursed
+- Temporary housing stipend available
+- Per diem may be adjusted
+- Contact HR for extended travel policy
+
+================================================================================
+10. CLIENT ENTERTAINMENT
+================================================================================
+
+10.1 Guidelines
+
+Client entertainment is permitted for:
+- Building client relationships
+- Business development
+- Contract negotiations
+- Project celebrations
+
+Must be:
+- Reasonable and appropriate
+- Include business discussion
+- Documented with business purpose
+
+10.2 Spending Limits
+
+Per person limits (including TechCorp employees):
+
+MEALS:
+- Lunch: $50/person
+- Dinner: $100/person
+- Exceeding limits requires director approval
+
+EVENTS:
+- Sporting events: $200/person
+- Theatre/concerts: $150/person
+- Golf outings: $250/person (including green fees)
+
+All event entertainment requires pre-approval from director.
+
+10.3 Alcohol Policy
+
+Alcohol at client entertainment:
+- Reasonable amounts only
+- Stay professional
+- Never excessive
+- Maximum 2-3 drinks per person
+- Driver must not consume alcohol
+
+Company will not reimburse alcohol-related incidents (DUI, etc.)
+
+10.4 Required Documentation
+
+For all client entertainment, document:
+- Client names and companies
+- TechCorp attendees
+- Business purpose
+- Itemized receipt
+- Date and location
+
+Missing information will result in denial.
+
+10.5 Gifts for Clients
+
+Client gifts are permitted:
+- Maximum $100/client/year
+- Must be business-appropriate
+- No cash or cash equivalents
+- Pre-approval required over $50
+- Must comply with client's gift policy
+
+Popular gift ideas:
+- Company swag
+- Gift baskets
+- Wine/spirits (if appropriate)
+- Event tickets (counts toward entertainment limit)
+
+================================================================================
+11. FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Can I use my corporate card for personal emergencies?
+A: No. Corporate cards are for business use only. Personal use may result in
+   card cancellation and disciplinary action.
+
+Q: What if my expense was denied?
+A: Review the denial reason in Concur. Correct the issue and resubmit, or
+   contact expenses@techcorp.com for clarification.
+
+Q: How do I get a corporate credit card?
+A: Contact Finance at expenses@techcorp.com. Eligibility depends on role and
+   travel frequency.
+
+Q: Can I tip service providers (drivers, waitstaff)?
+A: Yes, tips are reimbursable. Standard tipping: 15-20% for meals, $2-5 for
+   drivers, $2-5/bag for hotel staff.
+
+Q: What if I need to book travel on short notice?
+A: Book through Concur Travel. Short-notice bookings may exceed normal rates;
+   provide justification in expense report.
+
+Q: Can I bring my spouse/partner on a business trip?
+A: Personal travel is not reimbursable. Any incremental costs (larger hotel
+   room, extra meals) are employee's responsibility.
+
+Q: What if the conference hotel is more expensive than per diem?
+A: Conference hotels are often exempt from per diem if staying at the event
+   venue is required. Get pre-approval from your manager.
+
+Q: How do I expense a team meal or office party?
+A: Use "Team Building" expense category. Requires manager approval.
+   Limit: $50/person/quarter.
+
+Q: Can I earn credit card points on corporate card?
+A: Yes, but company retains rights to points. Personal benefit is incidental.
+
+Q: What if I forgot to expense something from 6 months ago?
+A: Expenses must be submitted within 90 days. Exceptions are rare and require
+   VP approval with strong justification.
+
+================================================================================
+POLICY COMPLIANCE
+================================================================================
+
+Expense fraud or abuse will result in:
+- Immediate repayment of fraudulent expenses
+- Disciplinary action up to and including termination
+- Potential legal action
+- Reporting to authorities if criminal
+
+Examples of fraud:
+- Falsifying receipts
+- Claiming personal expenses as business
+- Duplicate submissions
+- Inflating amounts
+- Claiming expenses not incurred
+
+If you suspect expense fraud, report to:
+- Your manager
+- Finance: expenses@techcorp.com
+- Ethics hotline: ethics.techcorp.com (anonymous)
+
+For questions or assistance:
+Finance Team: expenses@techcorp.com
+Phone: (555) 123-5400
+Office Hours: Monday-Friday, 9 AM - 5 PM EST
+
+Version History:
+- v2.3 - January 2026 - Updated per diem rates
+- v2.2 - September 2025 - Added remote work expense guidance
+- v2.0 - January 2025 - Major policy revision
+
+================================================================================
+END OF DOCUMENT
+================================================================================

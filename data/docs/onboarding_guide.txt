@@ -1,0 +1,840 @@
+================================================================================
+                        EMPLOYEE ONBOARDING GUIDE
+                             TechCorp Inc.
+                      Welcome to the TechCorp Family!
+                        Effective Date: January 2026
+                             Version 5.1
+================================================================================
+
+TABLE OF CONTENTS
+1. Welcome Message
+2. Your First Day
+3. Your First Week
+4. Your First Month
+5. Key Contacts and Resources
+6. Systems and Tools Access
+7. Benefits and Perks
+8. Company Culture and Values
+9. Career Development
+10. Frequently Asked Questions
+
+================================================================================
+1. WELCOME MESSAGE
+================================================================================
+
+Dear New Team Member,
+
+Welcome to TechCorp Inc.! We are thrilled to have you join our team.
+
+At TechCorp, we believe that our success is built on the talent, dedication,
+and creativity of our people. You were selected from hundreds of candidates
+because we saw something special in you.
+
+This onboarding guide will help you navigate your first days, weeks, and months
+at TechCorp. It's designed to set you up for success and help you become a
+productive and engaged member of our team.
+
+Your success is our success. Don't hesitate to ask questions, seek help, or
+share your ideas. We're all here to support you.
+
+Welcome aboard!
+
+Sarah Chen
+CEO, TechCorp Inc.
+
+================================================================================
+2. YOUR FIRST DAY
+================================================================================
+
+2.1 What to Expect
+
+YOUR SCHEDULE:
+
+9:00 AM - Arrival and Check-In
+- Meet your onboarding buddy at reception
+- Complete HR paperwork (if not done online)
+- Receive employee badge and welcome kit
+
+9:30 AM - IT Setup
+- Receive laptop, phone, and equipment
+- Set up accounts and passwords
+- Configure email and essential tools
+
+10:30 AM - Office Tour
+- Learn building layout and facilities
+- Meet office manager and key personnel
+- Locate your desk/workspace
+
+11:00 AM - Welcome Meeting with Manager
+- Review role expectations
+- Discuss immediate priorities
+- Set up regular 1:1 meetings
+
+12:00 PM - Team Lunch (On Us!)
+- Informal lunch with your immediate team
+- Get to know your colleagues
+- Ask questions in relaxed setting
+
+1:30 PM - HR Orientation
+- Benefits overview
+- Company policies and procedures
+- Complete required training modules
+
+3:00 PM - Department Introduction
+- Meet broader team
+- Learn about current projects
+- Understand team dynamics
+
+4:00 PM - First Assignments
+- Review initial tasks from manager
+- Set up development environment
+- Begin familiarization with codebase/systems
+
+5:00 PM - Day 1 Wrap-Up
+- Recap with onboarding buddy
+- Address any immediate questions
+- Plan for Day 2
+
+2.2 What to Bring
+
+REQUIRED:
+✓ Government-issued photo ID
+✓ Social Security card or passport
+✓ Bank account info (for direct deposit)
+✓ Signed offer letter and paperwork
+✓ Voided check (for payroll)
+
+OPTIONAL:
+✓ Lunch or snacks
+✓ Water bottle
+✓ Notebook and pen
+✓ Personal items for your desk
+
+2.3 Dress Code
+
+TechCorp dress code: Business Casual
+
+ACCEPTABLE:
+- Jeans (clean, no rips)
+- Casual shirts, blouses
+- Sneakers, casual shoes
+- Hoodies and sweatshirts (TechCorp branded preferred)
+
+AVOID:
+- Offensive graphics or slogans
+- Beachwear or athletic wear
+- Excessive revealing clothing
+
+Client-facing meetings: Dress one level up (business professional)
+
+2.4 First Day Checklist
+
+By end of Day 1, you should have:
+
+□ Employee badge
+□ Laptop and charger
+□ Company phone (if applicable)
+□ Email account set up
+□ Slack/Teams account active
+□ Building and office access working
+□ Emergency contact info submitted
+□ Direct deposit enrolled
+□ Benefits enrollment started
+□ Desk/workspace assigned
+
+================================================================================
+3. YOUR FIRST WEEK
+================================================================================
+
+3.1 Week 1 Goals
+
+By end of your first week, you should:
+
+ADMINISTRATIVE:
+□ Complete all HR onboarding tasks
+□ Finish required training modules
+□ Set up benefits elections
+□ Set up 1:1 meetings with key stakeholders
+
+TECHNICAL:
+□ Access all necessary systems and tools
+□ Set up development environment
+□ Review relevant documentation
+□ Make first small contribution (bug fix, doc update)
+
+RELATIONSHIP BUILDING:
+□ Meet your direct team members
+□ Schedule coffee chats with 3-5 colleagues
+□ Attend team meetings as observer
+□ Join relevant Slack channels
+
+LEARNING:
+□ Understand company mission and values
+□ Learn about your team's projects
+□ Review codebase or relevant materials
+□ Identify knowledge gaps and learning resources
+
+3.2 Key Meetings
+
+DAILY:
+- Team standup (15 min)
+- Check-in with onboarding buddy (informal)
+
+WEEK 1:
+- 1:1 with direct manager (60 min)
+- Team introduction meeting (30 min)
+- HR orientation session (2 hours)
+- IT systems training (1 hour)
+- Benefits enrollment session (30 min)
+
+OPTIONAL:
+- Coffee chats with team members
+- Lunch with different colleagues each day
+- Attend company all-hands if scheduled
+
+3.3 First Week Training Modules
+
+Complete in online learning portal:
+
+REQUIRED (Must complete in Week 1):
+□ Information Security Basics (2 hours)
+□ Code of Conduct and Ethics (1 hour)
+□ Anti-Harassment Training (1 hour)
+□ Data Privacy Fundamentals (1 hour)
+□ Emergency Procedures (30 min)
+
+RECOMMENDED:
+□ Company History and Values (30 min)
+□ Product Overview (45 min)
+□ Tools and Systems Overview (1 hour)
+
+3.4 First Week Tips
+
+✓ Take notes - lots of information coming your way
+✓ Ask questions - there are no stupid questions
+✓ Don't try to know everything at once
+✓ Make connections - introduce yourself proactively
+✓ Observe team dynamics and culture
+✓ Keep normal working hours - don't overdo it
+✓ Use your onboarding buddy liberally
+✓ Review materials shared during meetings
+
+================================================================================
+4. YOUR FIRST MONTH
+================================================================================
+
+4.1 30-Day Goals
+
+PERFORMANCE:
+□ Complete first significant project or task
+□ Demonstrate understanding of role responsibilities
+□ Begin contributing to team objectives
+□ Receive feedback from manager
+
+INTEGRATION:
+□ Establish relationships with key stakeholders
+□ Attend all relevant team meetings
+□ Join at least one employee resource group or interest group
+□ Participate in company social events
+
+DEVELOPMENT:
+□ Complete all onboarding training
+□ Identify learning and development goals
+□ Schedule quarterly goal-setting meeting with manager
+□ Begin working on 90-day objectives
+
+4.2 30-Day Check-In
+
+Your manager will conduct a formal 30-day check-in to:
+- Review progress and accomplishments
+- Discuss challenges and roadblocks
+- Clarify expectations
+- Adjust goals if needed
+- Provide feedback
+- Answer questions
+
+Prepare for this meeting by:
+- Reflecting on your first month
+- Documenting accomplishments
+- Identifying questions or concerns
+- Thinking about your 90-day goals
+
+4.3 90-Day Plan
+
+Work with your manager to create a 90-day plan that includes:
+
+LEARNING OBJECTIVES:
+- Technical skills to acquire
+- Product knowledge to gain
+- Processes to master
+- Tools to learn
+
+PERFORMANCE OBJECTIVES:
+- Specific deliverables
+- Projects to complete
+- Contributions to make
+- Metrics to achieve
+
+RELATIONSHIP OBJECTIVES:
+- Stakeholders to build relationships with
+- Cross-functional connections to make
+- Mentorship opportunities
+- Team collaboration goals
+
+4.4 Probationary Period
+
+Your first 90 days are a probationary period:
+- Performance will be evaluated at 30, 60, and 90 days
+- Opportunity to ensure mutual fit
+- Termination is possible if expectations not met
+- Most employees successfully complete probation
+
+Success factors:
+✓ Deliver on commitments
+✓ Communicate proactively
+✓ Seek feedback and act on it
+✓ Demonstrate cultural fit
+✓ Show growth mindset
+✓ Collaborate effectively
+
+================================================================================
+5. KEY CONTACTS AND RESOURCES
+================================================================================
+
+5.1 Important People to Know
+
+YOUR MANAGER:
+- First point of contact for questions
+- Weekly 1:1 meetings
+- Performance feedback and career development
+
+YOUR ONBOARDING BUDDY:
+- Peer mentor assigned for first 90 days
+- Informal questions and guidance
+- Cultural insights and social connections
+
+HR BUSINESS PARTNER:
+- Benefits and policies
+- Workplace issues
+- Career development resources
+- Contact: hr@techcorp.com
+
+IT HELPDESK:
+- Technical issues
+- System access
+- Equipment requests
+- Phone: (555) 123-5555 | Email: helpdesk@techcorp.com
+
+FACILITIES:
+- Building access
+- Desk/office setup
+- Mail and packages
+- Email: facilities@techcorp.com
+
+5.2 Essential Resources
+
+EMPLOYEE PORTAL:
+https://portal.techcorp.com
+- HR documents and policies
+- Benefits information
+- Payroll and time off
+- Employee directory
+
+LEARNING PLATFORM:
+https://learning.techcorp.com
+- Training courses
+- Certifications
+- Career development resources
+- Onboarding modules
+
+WIKI/KNOWLEDGE BASE:
+https://wiki.techcorp.com
+- Technical documentation
+- Process guides
+- Team pages
+- Product information
+
+GITHUB/CODE REPOSITORY:
+https://github.com/techcorp
+- Source code
+- Documentation
+- Issue tracking
+- Project boards
+
+5.3 Communication Channels
+
+EMAIL:
+- Formal communication
+- External communication
+- Documentation
+- Your email: firstname.lastname@techcorp.com
+
+SLACK:
+- Real-time chat
+- Team channels
+- Direct messages
+- Company announcements
+
+Key Slack channels:
+#general - Company-wide announcements
+#random - Casual conversation
+#help - Ask questions
+#engineering (or your department)
+#social - Events and activities
+#celebrations - Birthdays, work anniversaries, wins
+
+MEETINGS:
+- Microsoft Teams for video calls
+- Outlook for calendar management
+- Conference rooms bookable via Outlook
+
+================================================================================
+6. SYSTEMS AND TOOLS ACCESS
+================================================================================
+
+6.1 Core Systems
+
+You will receive access to:
+
+DAY 1:
+□ Email (Outlook)
+□ Slack
+□ Microsoft Teams
+□ Employee Portal
+□ Learning Platform
+
+WEEK 1:
+□ GitHub/Code Repository
+□ Jira (project tracking)
+□ Confluence (documentation)
+□ Figma (design, if applicable)
+□ AWS/Azure (if applicable)
+□ Customer systems (role-dependent)
+
+If you don't have access by expected date, contact IT Helpdesk.
+
+6.2 Passwords and Security
+
+REQUIREMENTS:
+- Use password manager (LastPass provided)
+- Enable MFA on all systems
+- Never share passwords
+- Use VPN when working remotely
+- Lock computer when away
+
+Review Information Security Guidelines (separate document).
+
+6.3 Development Environment
+
+ENGINEERS:
+- Set up guide: https://wiki.techcorp.com/dev-setup
+- Your onboarding buddy will assist
+- Allow 1-2 days for full setup
+- Request additional tools via IT
+
+STANDARD DEVELOPMENT STACK:
+- IDE: VS Code, IntelliJ, or approved
+- Languages: Python, JavaScript, Go (varies by team)
+- Version control: Git
+- Package managers: npm, pip, etc.
+- Docker for containerization
+
+6.4 Productivity Tools
+
+COLLABORATION:
+- Google Workspace (Docs, Sheets, Slides)
+- Miro (virtual whiteboard)
+- Loom (screen recording)
+- Calendly (scheduling)
+
+PROJECT MANAGEMENT:
+- Jira (tickets and sprints)
+- Asana (project tracking)
+- Confluence (documentation)
+
+DESIGN:
+- Figma (UI/UX)
+- Adobe Creative Suite (if applicable)
+
+================================================================================
+7. BENEFITS AND PERKS
+================================================================================
+
+7.1 Health Benefits
+
+MEDICAL INSURANCE:
+- Choice of 3 plans (HMO, PPO, HDHP)
+- Company pays 80% of premiums
+- Enrollment deadline: 30 days from start date
+- Coverage begins: 1st of month after start date
+
+DENTAL INSURANCE:
+- Company pays 100% of employee premium
+- Family coverage available
+
+VISION INSURANCE:
+- Included at no cost
+- Annual eye exam and glasses/contacts
+
+LIFE INSURANCE:
+- Company-provided: 1x annual salary
+- Additional voluntary coverage available
+
+DISABILITY INSURANCE:
+- Short-term: 60% of salary for up to 6 months
+- Long-term: 60% of salary after 6 months
+
+Enroll at: https://benefits.techcorp.com
+Questions: benefits@techcorp.com
+
+7.2 Retirement and Financial
+
+401(K) PLAN:
+- Eligible immediately
+- Company match: 4% (dollar-for-dollar)
+- Vest immediately
+- Auto-enrollment at 3% (can change)
+
+EMPLOYEE STOCK PURCHASE PLAN (ESPP):
+- Purchase company stock at 15% discount
+- Quarterly purchase periods
+- Eligible after 90 days
+
+FINANCIAL PLANNING:
+- Free financial advisor consultations
+- Retirement planning assistance
+- Tax preparation discounts
+
+7.3 Time Off and Leave
+
+PAID TIME OFF (PTO):
+- Year 0-2: 15 days
+- Year 3-5: 20 days
+- Year 6+: 25 days
+
+HOLIDAYS:
+- 11 paid holidays per year
+
+SICK LEAVE:
+- 10 days per year
+
+PARENTAL LEAVE:
+- Maternity: 18 weeks paid
+- Paternity: 4 weeks paid
+
+See Leave Policy document for full details.
+
+7.4 Professional Development
+
+LEARNING BUDGET:
+- $2,000/year for courses, conferences, certifications
+- Additional $500 for books and publications
+
+CONFERENCE ATTENDANCE:
+- 1-2 conferences per year (approved)
+- Company covers registration, travel, lodging
+
+INTERNAL TRAINING:
+- Unlimited access to LinkedIn Learning
+- Internal workshops and lunch-and-learns
+- Mentorship programs
+
+TUITION REIMBURSEMENT:
+- Up to $5,000/year for job-related degrees
+- Requires manager approval
+- Maintain B average
+
+7.5 Wellness and Lifestyle
+
+GYM MEMBERSHIP:
+- Reimbursement up to $50/month
+- Or on-site gym access (HQ only)
+
+WELLNESS PROGRAMS:
+- Mental health support (EAP)
+- Meditation app subscription (Calm, Headspace)
+- Wellness challenges and activities
+- Standing desks available
+
+COMMUTER BENEFITS:
+- Pre-tax commuter benefits ($300/month)
+- Electric vehicle charging stations
+- Bike storage and showers
+
+FOOD AND SNACKS:
+- Free coffee, tea, and snacks in office
+- Catered lunch on Fridays (HQ)
+- Team lunch budget: $25/person/month
+
+7.6 Work-Life Balance
+
+FLEXIBLE HOURS:
+- Core hours: 10 AM - 3 PM
+- Flexible start/end times
+
+REMOTE WORK:
+- Hybrid or fully remote options (role-dependent)
+- Home office stipend: $500 one-time
+- See Remote Work Policy for details
+
+SABBATICAL:
+- 4-week paid sabbatical after 5 years
+- Refresh and recharge program
+
+EMPLOYEE DISCOUNTS:
+- Corporate discounts on software, electronics
+- Entertainment and travel discounts
+- Partner perks program
+
+================================================================================
+8. COMPANY CULTURE AND VALUES
+================================================================================
+
+8.1 Our Mission
+
+"To empower businesses through innovative technology solutions that drive
+growth, efficiency, and transformation."
+
+8.2 Our Values
+
+INNOVATION:
+- We embrace new ideas and technologies
+- We encourage experimentation and learning from failure
+- We challenge the status quo
+
+COLLABORATION:
+- We work together across teams and functions
+- We value diverse perspectives
+- We win as a team
+
+CUSTOMER OBSESSION:
+- Our customers' success is our success
+- We listen and respond to customer needs
+- We deliver exceptional experiences
+
+INTEGRITY:
+- We do the right thing, even when no one is watching
+- We are transparent and honest
+- We take responsibility for our actions
+
+EXCELLENCE:
+- We set high standards and deliver quality
+- We continuously improve
+- We celebrate achievements
+
+8.3 Cultural Practices
+
+TRANSPARENCY:
+- Monthly all-hands meetings with CEO
+- Open book financial updates
+- Ask-me-anything sessions with leadership
+
+FEEDBACK CULTURE:
+- Regular 1:1s with manager
+- Quarterly performance reviews
+- 360-degree feedback
+- Open-door policy
+
+RECOGNITION:
+- Peer recognition program (kudos)
+- Quarterly awards
+- Spot bonuses
+- Public celebration of wins
+
+DIVERSITY AND INCLUSION:
+- Employee Resource Groups (ERGs)
+- Diversity training
+- Inclusive hiring practices
+- D&I council
+
+8.4 Social and Community
+
+EMPLOYEE RESOURCE GROUPS:
+- Women in Tech
+- LGBTQ+ Alliance
+- Black Excellence Network
+- Parents Network
+- Veterans Network
+
+SOCIAL EVENTS:
+- Monthly happy hours
+- Quarterly team outings
+- Annual company retreat
+- Holiday party
+- Sports leagues and clubs
+
+VOLUNTEER:
+- 2 paid volunteer days per year
+- Company-organized volunteer events
+- Donation matching program
+
+GIVING BACK:
+- Annual charity drive
+- Volunteer opportunities
+- Pro-bono consulting for nonprofits
+
+================================================================================
+9. CAREER DEVELOPMENT
+================================================================================
+
+9.1 Growth Pathways
+
+TechCorp supports two career tracks:
+
+INDIVIDUAL CONTRIBUTOR (IC):
+Junior → Mid-Level → Senior → Staff → Principal → Distinguished
+
+MANAGEMENT:
+Team Lead → Manager → Senior Manager → Director → VP → SVP → C-Level
+
+You can switch tracks based on interests and strengths.
+
+9.2 Performance Reviews
+
+FREQUENCY:
+- Quarterly check-ins
+- Annual formal review
+
+PROCESS:
+1. Self-assessment
+2. Manager assessment
+3. Peer feedback (360-degree)
+4. Calibration across teams
+5. Review meeting with manager
+6. Goal setting for next period
+
+9.3 Promotion Process
+
+Promotions based on:
+- Demonstrated performance at next level
+- Business impact
+- Leadership and collaboration
+- Consistent excellence over time
+
+Timeline:
+- Typically 18-24 months between promotions
+- Faster for exceptional performance
+- Discussed during annual review
+
+9.4 Learning Resources
+
+INTERNAL:
+- Mentorship program
+- Lunch-and-learn sessions
+- Internal tech talks
+- Book club
+- Hackathons
+
+EXTERNAL:
+- Online courses (Udemy, Coursera, Pluralsight)
+- Industry conferences
+- Certifications
+- Professional memberships
+
+9.5 Internal Mobility
+
+Opportunities to:
+- Move between teams
+- Try new roles
+- Work on different projects
+- Rotate through departments
+
+Process:
+- Discuss with current manager
+- Apply for internal openings
+- Interview with new team
+- Transition period (2-4 weeks)
+
+================================================================================
+10. FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: When do I get paid?
+A: Bi-weekly on Fridays. First paycheck will be on the second payday after
+   your start date.
+
+Q: How do I request time off?
+A: Submit requests via HR Portal at least 2 weeks in advance. Manager approval
+   required.
+
+Q: What if I'm sick?
+A: Notify your manager ASAP. No doctor's note needed for 1-3 days.
+
+Q: Can I work remotely?
+A: Depends on your role. Discuss with your manager. See Remote Work Policy.
+
+Q: How do I expense something?
+A: Submit via Concur Expense portal with receipts. See Expense Policy.
+
+Q: When are performance reviews?
+A: Quarterly check-ins, annual formal review (typically in January).
+
+Q: How do I get promoted?
+A: Consistent performance at next level, discussed during annual review.
+
+Q: Can I refer someone for a job?
+A: Yes! $3,000 bonus for successful referrals. Use careers portal.
+
+Q: What if I have a conflict with a colleague?
+A: Talk to them first. If unresolved, involve your manager or HR.
+
+Q: Who do I contact for IT issues?
+A: IT Helpdesk: helpdesk@techcorp.com or (555) 123-5555
+
+Q: How do I book a conference room?
+A: Via Outlook calendar. Search "Conference Rooms" and add to meeting.
+
+Q: Can I bring guests to the office?
+A: Yes, but they must sign in and be escorted. Notify reception in advance.
+
+Q: What's the remote work policy?
+A: Varies by role. Generally 2-3 days remote per week allowed. See policy.
+
+Q: How do I join employee resource groups?
+A: Check Slack channels or contact diversity@techcorp.com
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+COMPLETE THESE TASKS:
+
+BEFORE DAY 1:
+□ Review this guide
+□ Prepare required documents
+□ Plan your commute
+□ Review pre-boarding emails
+
+DAY 1:
+□ Arrive on time
+□ Complete HR paperwork
+□ Set up equipment
+□ Meet your team
+
+WEEK 1:
+□ Complete onboarding training
+□ Schedule 1:1s with key people
+□ Review 30-day goals with manager
+
+MONTH 1:
+□ Deliver on initial projects
+□ Build relationships
+□ Complete all training
+□ 30-day check-in with manager
+
+We're excited to have you on the team. Let's build something great together!
+
+For questions or support:
+Onboarding Team: onboarding@techcorp.com
+HR: hr@techcorp.com
+Your Manager: [Check employee portal]
+Your Onboarding Buddy: [Assigned on Day 1]
+
+Version History:
+- v5.1 - January 2026 - Updated benefits and remote work info
+- v5.0 - August 2025 - Major redesign for clarity
+- v4.2 - March 2025 - Added virtual onboarding options
+
+================================================================================
+WELCOME TO TECHCORP!
+================================================================================

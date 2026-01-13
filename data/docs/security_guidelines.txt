@@ -1,0 +1,645 @@
+================================================================================
+                    INFORMATION SECURITY GUIDELINES
+                            TechCorp Inc.
+                      Effective Date: January 2026
+                            Version 4.0
+================================================================================
+
+TABLE OF CONTENTS
+1. Purpose and Scope
+2. Security Principles
+3. Password and Authentication
+4. Device Security
+5. Network and Remote Access
+6. Email and Communication Security
+7. Data Protection and Privacy
+8. Physical Security
+9. Incident Response
+10. Compliance and Reporting
+11. Training and Awareness
+
+================================================================================
+1. PURPOSE AND SCOPE
+================================================================================
+
+These guidelines establish minimum security standards to protect TechCorp's
+information assets, customer data, and intellectual property from unauthorized
+access, disclosure, modification, or destruction.
+
+All employees, contractors, and third parties with access to TechCorp systems
+or data must comply with these guidelines.
+
+Non-compliance may result in disciplinary action, including termination and
+potential legal action.
+
+Policy Owner: Chief Information Security Officer (CISO)
+Contact: security@techcorp.com | Security Hotline: (555) 123-5700
+
+================================================================================
+2. SECURITY PRINCIPLES
+================================================================================
+
+TechCorp's security framework is built on these core principles:
+
+2.1 Confidentiality
+Protect information from unauthorized disclosure.
+Only share data with authorized parties on a need-to-know basis.
+
+2.2 Integrity
+Ensure information is accurate, complete, and protected from unauthorized
+modification.
+
+2.3 Availability
+Ensure authorized users have reliable access to information and systems when
+needed.
+
+2.4 Least Privilege
+Users should have the minimum access necessary to perform their job functions.
+
+2.5 Defense in Depth
+Multiple layers of security controls protect against threats.
+
+2.6 Zero Trust
+Never trust, always verify. All access must be authenticated and authorized.
+
+================================================================================
+3. PASSWORD AND AUTHENTICATION
+================================================================================
+
+3.1 Password Requirements
+
+All passwords must meet the following criteria:
+
+MINIMUM STANDARDS:
+- At least 12 characters long
+- Mix of uppercase and lowercase letters
+- At least one number
+- At least one special character (!@#$%^&*)
+- No dictionary words
+- No personal information (name, birthday, etc.)
+- Cannot reuse last 10 passwords
+
+3.2 Password Management
+
+DO:
+✓ Use a company-approved password manager (LastPass, 1Password)
+✓ Create unique passwords for each account
+✓ Change passwords immediately if compromise suspected
+✓ Store passwords securely in password manager
+
+DON'T:
+✗ Share passwords with anyone (including IT staff)
+✗ Write passwords on paper or sticky notes
+✗ Email passwords
+✗ Use the same password across multiple accounts
+✗ Save passwords in browsers without encryption
+
+3.3 Multi-Factor Authentication (MFA)
+
+MFA is REQUIRED for:
+- Email access
+- VPN connections
+- Cloud services (AWS, Azure, Google Cloud)
+- Financial systems
+- Customer data access
+- Administrative accounts
+
+Approved MFA methods:
+1. Authenticator app (Microsoft Authenticator, Google Authenticator)
+2. Hardware token (YubiKey)
+3. SMS (least preferred, use only if others unavailable)
+
+DO NOT use:
+✗ Email-based MFA for critical systems
+✗ Phone call verification (vulnerable to social engineering)
+
+3.4 Account Lockout
+
+Accounts will lock after 5 failed login attempts.
+Contact IT helpdesk to unlock: helpdesk@techcorp.com or ext. 5555
+
+3.5 Password Expiration
+
+Passwords must be changed:
+- Every 90 days for standard accounts
+- Every 60 days for privileged/admin accounts
+- Immediately upon suspected compromise
+
+System will prompt for password change 14 days before expiration.
+
+================================================================================
+4. DEVICE SECURITY
+================================================================================
+
+4.1 Approved Devices
+
+Only company-issued or IT-approved devices may be used for work.
+
+Company Devices Include:
+- Laptops (Mac, Windows)
+- Desktop computers
+- Company-issued smartphones and tablets
+- Approved BYOD (Bring Your Own Device) with security profile installed
+
+4.2 Device Protection
+
+All devices must have:
+
+✓ Full-disk encryption enabled
+✓ Automatic screen lock (5 minutes inactivity)
+✓ Strong password/PIN (not biometric alone)
+✓ Antivirus/anti-malware software (updated daily)
+✓ Firewall enabled
+✓ Automatic security updates enabled
+✓ Remote wipe capability (for lost/stolen devices)
+
+4.3 Physical Device Security
+
+Employees must:
+- Never leave devices unattended in public spaces
+- Lock screens when stepping away
+- Use cable locks in office or public locations
+- Store devices securely when not in use
+- Report lost or stolen devices immediately (within 1 hour)
+
+4.4 Software Installation
+
+Only install software:
+- Approved by IT department
+- From official sources (App Store, company portal)
+- After security review for third-party tools
+
+Prohibited software:
+✗ Pirated or unlicensed software
+✗ Peer-to-peer file sharing applications
+✗ Unauthorized remote access tools
+✗ Cryptocurrency mining software
+✗ Hacking or penetration testing tools (unless authorized)
+
+4.5 Device Disposal
+
+When disposing of devices:
+1. Contact IT for proper data wiping
+2. Do not donate, sell, or discard devices yourself
+3. Return all company devices to IT
+4. Ensure no company data remains on personal devices
+
+================================================================================
+5. NETWORK AND REMOTE ACCESS
+================================================================================
+
+5.1 VPN Usage
+
+VPN (Virtual Private Network) is MANDATORY when:
+- Working remotely
+- Accessing company systems from home
+- Using public Wi-Fi
+- Traveling
+- Accessing confidential data outside the office
+
+VPN Connection Steps:
+1. Launch Cisco AnyConnect or approved VPN client
+2. Enter credentials + MFA
+3. Connect before accessing any company resources
+4. Keep VPN connected throughout work session
+
+5.2 Wi-Fi Security
+
+OFFICE WI-FI:
+- Use "TechCorp-Secure" network
+- Do not share Wi-Fi password with visitors
+- Visitors use "TechCorp-Guest" network
+
+HOME WI-FI:
+- Change default router password
+- Use WPA3 encryption (or WPA2 minimum)
+- Hide SSID broadcast (optional but recommended)
+- Create separate guest network for visitors
+
+PUBLIC WI-FI:
+- Never access company systems without VPN
+- Disable automatic Wi-Fi connection
+- Forget public networks after use
+- Use mobile hotspot when possible
+
+5.3 Remote Desktop
+
+Remote desktop access requires:
+- VPN connection established first
+- MFA for remote desktop login
+- Approved remote desktop software only (no TeamViewer, etc.)
+- Manager and IT approval for regular remote desktop use
+
+5.4 Cloud Services
+
+Only use approved cloud services:
+
+APPROVED:
+✓ Microsoft 365 (OneDrive, SharePoint)
+✓ Google Workspace (with company account)
+✓ Slack (company workspace)
+✓ Zoom (company account)
+✓ AWS, Azure (with proper permissions)
+
+NOT APPROVED for company data:
+✗ Personal Dropbox, Google Drive, iCloud
+✗ Personal email for work files
+✗ WeTransfer, FileZilla, or similar
+✗ Consumer file sharing services
+
+5.5 Bandwidth and Network Usage
+
+Prohibited activities:
+✗ Streaming video/music during work hours (except work-related)
+✗ Downloading large personal files
+✗ Online gaming
+✗ Cryptocurrency mining
+✗ Torrenting or P2P file sharing
+
+Network usage is monitored for security and performance.
+
+================================================================================
+6. EMAIL AND COMMUNICATION SECURITY
+================================================================================
+
+6.1 Email Best Practices
+
+✓ Only use company email for work communications
+✓ Check sender address carefully before responding
+✓ Hover over links before clicking to verify destination
+✓ Be cautious of urgent requests (especially for money or credentials)
+✓ Encrypt sensitive emails (use "Encrypt" button in Outlook)
+
+6.2 Phishing Awareness
+
+Warning signs of phishing emails:
+
+⚠ Unexpected attachments
+⚠ Requests for passwords or personal information
+⚠ Urgent or threatening language
+⚠ Spelling and grammar errors
+⚠ Suspicious sender address
+⚠ Generic greetings ("Dear User")
+⚠ Too-good-to-be-true offers
+
+If you receive a suspicious email:
+1. Do not click links or download attachments
+2. Do not reply
+3. Forward to phishing@techcorp.com
+4. Delete the email
+
+6.3 Email Attachments
+
+Before opening attachments:
+- Verify sender is legitimate
+- Scan with antivirus (automatic for company email)
+- Be extra cautious with: .exe, .zip, .scr, .js files
+- Contact sender via separate channel if unexpected
+
+Sending attachments:
+- Use OneDrive links for large files (>10 MB)
+- Encrypt sensitive documents
+- Password-protect when emailing outside the company
+
+6.4 Social Engineering
+
+Be aware of social engineering tactics:
+
+PRETEXTING: Attacker creates false scenario to trick you
+BAITING: Offering something enticing (free software, prize)
+QUID PRO QUO: "I'll help you if you give me your password"
+TAILGATING: Following you into secure areas
+
+If someone requests sensitive information:
+1. Verify their identity through official channels
+2. Don't rely on caller ID or email alone
+3. When in doubt, escalate to security team
+
+6.5 Instant Messaging
+
+Slack, Teams, and other messaging:
+- Treat as professional communication
+- Don't share sensitive data in public channels
+- Use private/encrypted channels for confidential discussions
+- Be aware that messages may be logged and monitored
+- Don't click suspicious links
+
+================================================================================
+7. DATA PROTECTION AND PRIVACY
+================================================================================
+
+7.1 Data Classification
+
+All data must be classified as:
+
+PUBLIC
+- Press releases, marketing materials
+- Public website content
+- No restrictions
+
+INTERNAL
+- Internal communications, policies
+- Available to all employees
+- Not for external sharing
+
+CONFIDENTIAL
+- Customer data, financial information
+- Employee records, contracts
+- Requires encryption and access controls
+- Need-to-know basis
+
+RESTRICTED
+- Trade secrets, M&A information
+- Security credentials, source code
+- Highest protection level
+- Requires special authorization
+
+7.2 Handling Confidential Data
+
+When working with confidential data:
+
+✓ Encrypt files and emails
+✓ Use company-approved cloud storage
+✓ Lock screens when displaying confidential info
+✓ Shred physical documents
+✓ Use privacy screens on laptops in public
+✓ Limit access to authorized personnel
+
+✗ Don't discuss in public places
+✗ Don't send via personal email
+✗ Don't store on personal devices
+✗ Don't leave visible on desk
+✗ Don't share with unauthorized parties
+
+7.3 Customer Data
+
+Special handling required for customer data:
+
+- Access only if required for your job
+- Log all access (automatic for most systems)
+- Never download to personal devices
+- Follow data retention policies
+- Report any unauthorized access immediately
+- Comply with GDPR, CCPA, and other privacy laws
+
+7.4 Data Retention and Disposal
+
+Retention periods:
+- Financial records: 7 years
+- Employee records: 7 years after termination
+- Customer data: Per contract or regulation
+- Email: 3 years (auto-archive)
+- Project documents: Per department policy
+
+Secure disposal methods:
+- Digital: Use approved data wiping tools
+- Physical: Cross-cut shredding (minimum)
+- Hard drives: Physical destruction or certified wiping
+- Contact IT for guidance: disposal@techcorp.com
+
+7.5 Data Backup
+
+Critical data should be backed up:
+- OneDrive/SharePoint: Automatic continuous backup
+- Local files: Back up to company OneDrive weekly
+- Never rely solely on local storage
+
+Test restore process periodically to ensure backups work.
+
+================================================================================
+8. PHYSICAL SECURITY
+================================================================================
+
+8.1 Office Access
+
+- Badge required for all office access
+- Don't share badges or PINs
+- Report lost badges immediately
+- Don't prop open secure doors
+- Don't allow tailgating (politely ask to badge in)
+- Visitors must sign in and be escorted
+
+8.2 Clean Desk Policy
+
+At end of day:
+✓ Lock away confidential documents
+✓ Log out of computer or shut down
+✓ Secure laptops in locked drawer or take home
+✓ Clear whiteboards with sensitive info
+✓ Lock office door
+
+8.3 Visitor Management
+
+When hosting visitors:
+- Pre-register via security portal
+- Escort at all times
+- Provide visitor badge
+- Don't allow access to confidential areas
+- Sign out visitor when they leave
+
+8.4 Working in Public
+
+When working from coffee shops, airports, etc.:
+- Use VPN always
+- Privacy screen on laptop
+- Don't leave devices unattended
+- Be aware of shoulder surfing
+- Don't discuss confidential matters
+- Use headphones for calls
+
+================================================================================
+9. INCIDENT RESPONSE
+================================================================================
+
+9.1 What is a Security Incident?
+
+Examples include:
+- Lost or stolen devices
+- Suspected malware infection
+- Unauthorized access to systems or data
+- Data breach or leak
+- Phishing attempt or social engineering
+- Physical security breach
+- Suspicious activity on your account
+
+9.2 Reporting Incidents
+
+IMMEDIATELY report incidents to:
+
+Email: security@techcorp.com
+Phone: (555) 123-5700 (24/7 Security Hotline)
+Slack: #security-incidents channel
+
+Provide:
+- Your name and contact info
+- Date and time of incident
+- Detailed description
+- Affected systems or data
+- Actions taken so far
+
+9.3 Response Timeline
+
+- Report within 1 hour of discovery
+- Security team will respond within 30 minutes
+- Investigation begins immediately
+- You will receive updates every 4 hours
+- Post-incident review within 1 week
+
+9.4 Your Responsibilities During Incident
+
+DO:
+✓ Report immediately
+✓ Preserve evidence (don't delete logs, emails)
+✓ Document what happened
+✓ Follow security team instructions
+✓ Maintain confidentiality
+
+DON'T:
+✗ Try to fix it yourself
+✗ Ignore or hide the incident
+✗ Discuss publicly before clearance
+✗ Blame others or panic
+
+9.5 Lost or Stolen Device Procedure
+
+Within 1 hour:
+1. Report to Security Hotline: (555) 123-5700
+2. Report to IT Helpdesk: (555) 123-5555
+3. If device contained customer data, report to Legal
+
+IT will:
+- Remotely lock and wipe the device
+- Disable your accounts temporarily
+- Issue replacement device
+- Investigate potential data exposure
+
+================================================================================
+10. COMPLIANCE AND REPORTING
+================================================================================
+
+10.1 Regulatory Compliance
+
+TechCorp complies with:
+- GDPR (General Data Protection Regulation)
+- CCPA (California Consumer Privacy Act)
+- SOC 2 Type II
+- ISO 27001
+- HIPAA (for healthcare clients)
+- PCI DSS (for payment processing)
+
+Your role:
+- Follow security guidelines
+- Complete required training
+- Report violations
+- Participate in audits
+
+10.2 Audits and Assessments
+
+Expect periodic:
+- Security audits (internal and external)
+- Phishing simulations
+- Access reviews
+- Compliance assessments
+
+Participation is mandatory. Findings must be remediated within 30 days.
+
+10.3 Reporting Violations
+
+If you observe a security violation:
+
+1. Report to security@techcorp.com or your manager
+2. Anonymous reporting: ethicshotline.techcorp.com
+3. No retaliation for good-faith reports
+
+Examples of violations:
+- Sharing passwords
+- Bypassing security controls
+- Unauthorized data access
+- Policy non-compliance
+
+10.4 Consequences
+
+Violations may result in:
+- Verbal or written warning
+- Mandatory retraining
+- Suspension of access privileges
+- Termination of employment
+- Legal action (for serious breaches)
+
+Severity depends on:
+- Intent (accidental vs. malicious)
+- Impact (data exposed, systems affected)
+- Frequency (one-time vs. repeated)
+- Cooperation during investigation
+
+================================================================================
+11. TRAINING AND AWARENESS
+================================================================================
+
+11.1 Required Training
+
+All employees must complete:
+
+ONBOARDING (First week):
+- Information Security Basics (2 hours)
+- Phishing Awareness (30 minutes)
+- Data Privacy Fundamentals (1 hour)
+
+ANNUAL (Every year):
+- Security Refresher (1 hour)
+- Updated threats and trends (30 minutes)
+- Role-specific security training (varies)
+
+ONGOING:
+- Monthly security tips newsletter
+- Quarterly phishing simulations
+- Ad-hoc alerts for emerging threats
+
+11.2 Resources
+
+Security resources available at:
+
+Internal Portal: https://security.techcorp.com
+
+Key resources:
+- Security policies and procedures
+- Training videos
+- Incident reporting forms
+- Contact information
+- FAQ
+- Security tools downloads
+
+11.3 Getting Help
+
+Security Team: security@techcorp.com
+IT Helpdesk: helpdesk@techcorp.com | (555) 123-5555
+24/7 Security Hotline: (555) 123-5700
+
+For urgent issues: Call hotline immediately
+For questions: Email security team
+For password resets: IT Helpdesk
+
+================================================================================
+YOUR RESPONSIBILITY
+================================================================================
+
+Security is everyone's responsibility.
+
+By following these guidelines, you protect:
+✓ TechCorp's reputation and assets
+✓ Customer trust and data
+✓ Your colleagues' work
+✓ Your own career and personal information
+
+Stay vigilant. Think before you click. Report suspicious activity.
+
+Thank you for keeping TechCorp secure.
+
+Version History:
+- v4.0 - January 2026 - Major update: Zero Trust, MFA requirements
+- v3.5 - August 2025 - Added remote work security
+- v3.0 - March 2025 - GDPR compliance updates
+
+================================================================================
+END OF DOCUMENT
+================================================================================

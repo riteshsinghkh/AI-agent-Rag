@@ -1,0 +1,92 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.development
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Azure
+.azure/
+*.publishsettings
+*.azurePubxml
+
+# FAISS Index (keep committed for demo, but exclude in production)
+# faiss_index.pkl
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Downloaded Models (if using local models)
+models/
+*.safetensors
+*.bin
+*.onnx
+
+# Test Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Azure
+.azure/

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .chat-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f7f7f7;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message-content {
+            display: inline-block;
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.agent .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 4px;
+            text-align: left;
+        }
+
+        .sources {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+            background: #f0f0f0;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        .sources strong {
+            color: #764ba2;
+        }
+
+        .input-area {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        #questionInput {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #questionInput:focus {
+            border-color: #667eea;
+        }
+
+        #askButton {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #askButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        #askButton:active {
+            transform: translateY(0);
+        }
+
+        #askButton:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc !important;
+        }
+
+        .welcome {
+            text-align: center;
+            color: #999;
+            margin-top: 50px;
+        }
+
+        .welcome h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            font-size: 14px;
+        }
+
+        .example-questions {
+            margin-top: 20px;
+        }
+
+        .example-btn {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .example-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Agent Assistant</h1>
+            <p>Ask me anything about company policies</p>
+        </div>
+
+        <div class="chat-area" id="chatArea">
+            <div class="welcome">
+                <h2>👋 Welcome!</h2>
+                <p>I can help you with company policies, guidelines, and procedures.</p>
+                <div class="example-questions">
+                    <p style="margin-bottom: 10px;"><strong>Try asking:</strong></p>
+                    <span class="example-btn" onclick="askExample('What is the leave policy?')">What is the leave policy?</span>
+                    <span class="example-btn" onclick="askExample('How does remote work policy work?')">Remote work policy?</span>
+                    <span class="example-btn" onclick="askExample('What are the security guidelines?')">Security guidelines?</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="questionInput" 
+                    placeholder="Type your question here..." 
+                    onkeypress="handleKeyPress(event)"
+                />
+                <button id="askButton" onclick="askQuestion()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = '/ask';  // Change this if your API is hosted elsewhere
+        const SESSION_ID = 'user-' + Math.random().toString(36).substring(7);
+
+        // Add user message to chat
+        function addUserMessage(message) {
+            const chatArea = document.getElementById('chatArea');
+            const welcome = document.querySelector('.welcome');
+            if (welcome) welcome.remove();
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `<div class="message-content">${escapeHtml(message)}</div>`;
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // Add agent message to chat
+        function addAgentMessage(answer, sources = []) {
+            const chatArea = document.getElementById('chatArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message agent';
+            
+            let sourcesHtml = '';
+            if (sources && sources.length > 0) {
+                sourcesHtml = `<div class="sources"><strong>📚 Sources:</strong> ${sources.join(', ')}</div>`;
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">${escapeHtml(answer)}</div>
+                ${sourcesHtml}
+            `;
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // Add loading indicator
+        function addLoadingMessage() {
+            const chatArea = document.getElementById('chatArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message agent';
+            messageDiv.id = 'loadingMessage';
+            messageDiv.innerHTML = `<div class="message-content"><div class="loading"></div> Thinking...</div>`;
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // Remove loading indicator
+        function removeLoadingMessage() {
+            const loadingMsg = document.getElementById('loadingMessage');
+            if (loadingMsg) loadingMsg.remove();
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                askQuestion();
+            }
+        }
+
+        // Ask question to the API
+        async function askQuestion() {
+            const input = document.getElementById('questionInput');
+            const button = document.getElementById('askButton');
+            const question = input.value.trim();
+
+            if (!question) return;
+
+            // Disable input
+            input.disabled = true;
+            button.disabled = true;
+            button.textContent = 'Sending...';
+
+            // Add user message
+            addUserMessage(question);
+            input.value = '';
+
+            // Add loading indicator
+            addLoadingMessage();
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: question,
+                        session_id: SESSION_ID
+                    })
+                });
+
+                removeLoadingMessage();
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                addAgentMessage(data.answer, data.sources);
+
+            } catch (error) {
+                removeLoadingMessage();
+                addAgentMessage('❌ Sorry, I encountered an error. Please try again.', []);
+                console.error('Error:', error);
+            } finally {
+                // Re-enable input
+                input.disabled = false;
+                button.disabled = false;
+                button.textContent = 'Send';
+                input.focus();
+            }
+        }
+
+        // Ask example question
+        function askExample(question) {
+            document.getElementById('questionInput').value = question;
+            askQuestion();
+        }
+
+        // Focus input on load
+        window.onload = () => {
+            document.getElementById('questionInput').focus();
+        };
+    </script>
+</body>
+</html>

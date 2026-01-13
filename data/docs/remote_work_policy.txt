@@ -1,0 +1,491 @@
+================================================================================
+                        REMOTE WORK POLICY
+                           TechCorp Inc.
+                     Effective Date: January 2026
+                          Version 2.1
+================================================================================
+
+TABLE OF CONTENTS
+1. Introduction and Purpose
+2. Scope and Eligibility
+3. Remote Work Arrangements
+4. Equipment and Technology
+5. Work Hours and Availability
+6. Communication and Collaboration
+7. Performance and Productivity
+8. Data Security and Confidentiality
+9. Health and Safety
+10. Application and Approval Process
+11. FAQ
+
+================================================================================
+1. INTRODUCTION AND PURPOSE
+================================================================================
+
+TechCorp Inc. is committed to providing flexible work arrangements that support
+employee wellbeing, productivity, and work-life balance while maintaining
+operational excellence and team collaboration.
+
+This policy establishes guidelines for remote work to ensure:
+- Consistent standards across the organization
+- Clear expectations for employees and managers
+- Protection of company assets and data
+- Compliance with legal and regulatory requirements
+
+Policy Owner: Human Resources & IT Department
+Contact: remotework@techcorp.com | Extension: 5600
+
+================================================================================
+2. SCOPE AND ELIGIBILITY
+================================================================================
+
+2.1 Who Can Work Remotely?
+
+This policy applies to:
+✓ Full-time employees
+✓ Part-time employees (20+ hours/week)
+✓ Contractors (with manager approval)
+
+Not eligible:
+✗ Employees in probationary period (first 90 days)
+✗ Roles requiring physical presence (e.g., lab technicians, facilities)
+✗ Employees with performance issues
+
+2.2 Role Suitability
+
+Suitable roles for remote work typically:
+- Can be performed independently
+- Have measurable outputs
+- Do not require specialized on-site equipment
+- Have minimal in-person collaboration requirements
+
+Managers will assess role suitability on a case-by-case basis.
+
+================================================================================
+3. REMOTE WORK ARRANGEMENTS
+================================================================================
+
+3.1 Types of Remote Work
+
+TechCorp offers three remote work models:
+
+A) FULLY REMOTE
+   - Work from home 100% of the time
+   - May be required to attend office for specific events
+   - Geographic restrictions apply (must reside in approved states/countries)
+
+B) HYBRID
+   - Split time between office and remote location
+   - Typical schedules:
+     * 3 days office / 2 days remote
+     * 2 days office / 3 days remote
+   - Core office days may be designated by team
+
+C) AD-HOC REMOTE
+   - Occasional remote work for specific needs
+   - Does not require formal agreement
+   - Subject to manager approval
+   - Maximum 2 days per week
+
+3.2 Geographic Restrictions
+
+Remote employees must:
+- Reside within the same country as their office location
+- Be in a time zone within +/- 3 hours of their team
+- Have reliable high-speed internet (minimum 50 Mbps)
+- Comply with local employment laws
+
+International remote work requires VP-level approval and legal review.
+
+3.3 Office Presence Requirements
+
+Even fully remote employees may be required to:
+- Attend quarterly team meetings
+- Participate in annual company events
+- Come to office for onboarding, training, or special projects
+- Provide 2 weeks notice for required office visits
+
+Travel expenses for required office visits will be reimbursed.
+
+================================================================================
+4. EQUIPMENT AND TECHNOLOGY
+================================================================================
+
+4.1 Company-Provided Equipment
+
+TechCorp provides the following equipment for remote work:
+
+Standard Package:
+- Laptop (Mac or Windows, based on role)
+- External monitor (24-inch)
+- Keyboard and mouse
+- Headset with microphone
+- Laptop stand
+- Webcam (if laptop camera insufficient)
+
+Additional equipment (e.g., second monitor, ergonomic chair) may be approved
+based on role requirements and manager discretion.
+
+4.2 Employee Responsibilities
+
+Employees must:
+- Use company equipment only for work purposes
+- Maintain equipment in good condition
+- Report any issues immediately via IT helpdesk
+- Return all equipment if employment ends or remote arrangement terminates
+- Not allow others to use company equipment
+
+4.3 Home Office Setup
+
+Employees should establish a dedicated workspace that:
+- Is quiet and free from distractions
+- Has adequate lighting
+- Is ergonomically sound
+- Has reliable internet connectivity
+- Is separate from living areas (if possible)
+
+TechCorp provides a one-time $500 home office allowance for furniture and
+supplies. Submit receipts to Finance for reimbursement.
+
+4.4 Internet and Connectivity
+
+Minimum requirements:
+- Download speed: 50 Mbps
+- Upload speed: 10 Mbps
+- Latency: < 50ms
+- Backup connection available (mobile hotspot)
+
+TechCorp reimburses up to $75/month for home internet costs.
+Submit expense claim monthly with internet bill.
+
+4.5 Software and Tools
+
+All remote employees must use:
+- Company VPN when accessing corporate systems
+- Microsoft Teams for communication
+- Email (Outlook)
+- Project management tools (Jira, Asana)
+- Password manager (LastPass)
+- Time tracking software (as required by role)
+
+Personal software installations require IT approval.
+
+================================================================================
+5. WORK HOURS AND AVAILABILITY
+================================================================================
+
+5.1 Core Hours
+
+All employees must be available during core business hours:
+- 10:00 AM - 3:00 PM (local time)
+
+During core hours, employees must:
+- Be online and responsive on Teams
+- Attend scheduled meetings
+- Respond to urgent requests within 30 minutes
+
+5.2 Flexible Hours
+
+Outside core hours, employees may work flexible schedules provided:
+- Total work hours meet employment agreement (typically 40 hours/week)
+- Manager is informed of typical schedule
+- Team collaboration is not impacted
+- Customer-facing commitments are met
+
+5.3 Time Zone Considerations
+
+Employees working across time zones should:
+- Indicate their time zone in email signature and calendar
+- Set Teams status to show working hours
+- Accommodate critical meetings in team's primary time zone
+- Rotate meeting times fairly if significant time zone differences exist
+
+5.4 Overtime and After-Hours Work
+
+Remote employees are not expected to work beyond regular hours unless:
+- Explicitly approved by manager
+- Emergency situation
+- Specific project deadline
+
+Overtime must be pre-approved and will be compensated according to
+employment agreement and local laws.
+
+================================================================================
+6. COMMUNICATION AND COLLABORATION
+================================================================================
+
+6.1 Response Time Expectations
+
+During work hours:
+- Urgent messages (Teams): 15 minutes
+- Email: 2 hours
+- Non-urgent requests: Same business day
+
+Out of office:
+- Set Teams status appropriately
+- Enable auto-reply on email
+- Delegate urgent matters to colleague
+
+6.2 Meeting Best Practices
+
+For virtual meetings:
+- Join 2 minutes early
+- Use video when possible (exceptions for bandwidth issues)
+- Mute when not speaking
+- Use chat for questions
+- Take notes and share action items
+- Record meetings for absent team members (with consent)
+
+6.3 Daily Standup/Check-ins
+
+Teams are encouraged to have brief daily check-ins:
+- 15-minute standup or async update
+- Share today's priorities
+- Identify blockers
+- Maintain team connection
+
+Format determined by each team (synchronous or asynchronous).
+
+6.4 Collaboration Tools
+
+Use appropriate tools for different needs:
+
+Quick questions: Teams chat
+Discussions: Teams call or video
+Brainstorming: Virtual whiteboard (Miro, Mural)
+Documentation: Confluence, SharePoint
+Project tracking: Jira, Asana
+File sharing: OneDrive, SharePoint
+
+================================================================================
+7. PERFORMANCE AND PRODUCTIVITY
+================================================================================
+
+7.1 Performance Measurement
+
+Remote employees are evaluated based on:
+- Output and deliverables (not hours worked)
+- Quality of work
+- Meeting deadlines
+- Team collaboration
+- Communication effectiveness
+- Adherence to company values
+
+7.2 Productivity Expectations
+
+Managers will:
+- Set clear goals and deliverables
+- Provide regular feedback
+- Conduct bi-weekly 1:1s (minimum)
+- Review progress quarterly
+
+Employees will:
+- Communicate progress proactively
+- Flag issues early
+- Ask for help when needed
+- Maintain regular communication
+
+7.3 Monitoring and Tracking
+
+TechCorp does NOT use:
+- Keystroke monitoring
+- Screen recording
+- Intrusive surveillance tools
+
+We trust employees and measure results, not activity.
+
+Time tracking is required only for:
+- Billable client work
+- Project accounting
+- Specific compliance requirements
+
+================================================================================
+8. DATA SECURITY AND CONFIDENTIALITY
+================================================================================
+
+8.1 Security Requirements
+
+All remote employees must:
+
+✓ Use company VPN for all work activities
+✓ Enable full-disk encryption on devices
+✓ Use strong passwords (12+ characters, password manager)
+✓ Enable multi-factor authentication (MFA)
+✓ Lock computer when stepping away
+✓ Keep software and OS updated
+✓ Use encrypted file sharing only (no personal Dropbox, etc.)
+
+8.2 Prohibited Activities
+
+Never:
+✗ Access company systems on public Wi-Fi without VPN
+✗ Share passwords or credentials
+✗ Leave confidential documents visible
+✗ Discuss sensitive information in public spaces
+✗ Allow family/friends to use company equipment
+✗ Store company data on personal devices
+
+8.3 Incident Reporting
+
+Report security incidents immediately to:
+- IT Security: security@techcorp.com
+- Phone: (555) 123-5700 (24/7 hotline)
+
+Incidents include:
+- Lost or stolen equipment
+- Suspected data breach
+- Phishing attempts
+- Unauthorized access
+- Malware infection
+
+8.4 Data Classification
+
+Handle data according to classification:
+
+PUBLIC: No restrictions
+INTERNAL: Company employees only, VPN required
+CONFIDENTIAL: Encrypted storage, need-to-know basis
+RESTRICTED: Special handling, approval required
+
+When in doubt, treat data as CONFIDENTIAL.
+
+================================================================================
+9. HEALTH AND SAFETY
+================================================================================
+
+9.1 Ergonomics
+
+Set up your workspace to prevent strain:
+- Monitor at eye level
+- Chair supports lower back
+- Feet flat on floor
+- Keyboard and mouse at elbow height
+- Take breaks every hour
+
+TechCorp offers virtual ergonomic assessments. Contact wellness@techcorp.com
+
+9.2 Breaks and Wellness
+
+Employees should:
+- Take a 30-minute lunch break (unpaid)
+- Take two 15-minute breaks during the day
+- Step away from the desk regularly
+- Set boundaries between work and personal life
+
+9.3 Mental Health Support
+
+Remote work can be isolating. TechCorp provides:
+- Employee Assistance Program (EAP): 24/7 counseling
+- Mental health days (included in sick leave)
+- Virtual wellness programs
+- Social connection activities
+
+Contact: wellness@techcorp.com or EAP: 1-800-XXX-XXXX
+
+9.4 Workers' Compensation
+
+Injuries sustained during work hours in your home office may be covered by
+workers' compensation. Report any work-related injuries immediately to HR.
+
+================================================================================
+10. APPLICATION AND APPROVAL PROCESS
+================================================================================
+
+10.1 How to Apply
+
+To request a remote work arrangement:
+
+Step 1: Review eligibility criteria
+Step 2: Discuss with your manager informally
+Step 3: Complete Remote Work Application Form
+Step 4: Submit via HR Portal: https://portal.techcorp.com/remote
+Step 5: Await approval (typically 2 weeks)
+
+10.2 Approval Criteria
+
+Applications are evaluated based on:
+- Role suitability
+- Employee performance history
+- Team dynamics and coverage
+- Business needs
+- Technology capabilities
+
+10.3 Trial Period
+
+New remote work arrangements include a 90-day trial period:
+- Performance and productivity will be monitored
+- Regular check-ins with manager
+- Either party can end arrangement with 2 weeks notice
+- After trial, arrangement becomes permanent (subject to ongoing review)
+
+10.4 Modification or Termination
+
+Remote work arrangements may be modified or terminated if:
+- Performance declines
+- Business needs change
+- Role changes
+- Employee relocates outside approved area
+- Security or compliance issues arise
+
+Employees will receive 30 days notice of termination (except for cause).
+
+================================================================================
+11. FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Can I work from a coffee shop or co-working space?
+A: Yes, occasionally, but ensure you use VPN and protect confidential
+   information. Do not discuss sensitive matters in public. Regular work
+   should be from your designated home office.
+
+Q: What if my internet goes down?
+A: Have a backup plan (mobile hotspot, nearby co-working space). Notify your
+   manager immediately. If outage exceeds 2 hours, you may need to take PTO
+   or work from office.
+
+Q: Can I move to a different state/country?
+A: Relocations require HR approval due to tax, legal, and payroll implications.
+   Submit request at least 60 days in advance. International moves require
+   VP approval.
+
+Q: Who pays for my home office furniture?
+A: TechCorp provides a one-time $500 allowance. Purchases above this amount
+   require manager approval.
+
+Q: Am I required to have video on during meetings?
+A: Generally yes, to maintain team connection. Exceptions for bandwidth issues
+   or specific circumstances - discuss with your manager.
+
+Q: Can I care for children while working remotely?
+A: Remote work is not a substitute for childcare. You are expected to be fully
+   focused during work hours. Make appropriate childcare arrangements.
+
+Q: What happens to my remote work arrangement if I change roles?
+A: The new role must be evaluated for remote work suitability. Your arrangement
+   may continue, be modified, or end based on the new role's requirements.
+
+Q: Can I expense a co-working space?
+A: In some cases, yes. If your home is not suitable for regular work, discuss
+   with your manager. Typically covered up to $200/month with approval.
+
+================================================================================
+POLICY COMPLIANCE
+================================================================================
+
+Violation of this policy may result in:
+- Warning
+- Termination of remote work privileges
+- Disciplinary action up to and including termination of employment
+
+For questions or concerns, contact:
+Remote Work Team: remotework@techcorp.com
+Phone: (555) 123-5600
+
+Version History:
+- v2.1 - January 2026 - Updated security requirements
+- v2.0 - September 2025 - Major revision post-pandemic
+- v1.5 - March 2024 - Added hybrid model
+
+================================================================================
+END OF DOCUMENT
+================================================================================

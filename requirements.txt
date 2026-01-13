@@ -1,0 +1,16 @@
+# Core Web Framework
+fastapi
+uvicorn[standard]
+pydantic
+
+# LLM Providers
+openai  # Azure OpenAI SDK (primary provider)
+requests  # For Hugging Face API calls (fallback provider)
+huggingface_hub  # Hugging Face Inference API client (handles routing automatically)
+
+# RAG Components
+faiss-cpu  # Vector database
+sentence-transformers  # Local embeddings (includes transformers and torch)
+accelerate  # For efficient local model loading
+python-dotenv  # Environment variables
+

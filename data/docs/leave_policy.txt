@@ -1,0 +1,342 @@
+================================================================================
+                          EMPLOYEE LEAVE POLICY
+                              TechCorp Inc.
+                        Effective Date: January 2026
+                           Version 3.2
+================================================================================
+
+TABLE OF CONTENTS
+1. Overview
+2. Types of Leave
+3. Annual Leave / Paid Time Off (PTO)
+4. Sick Leave
+5. Parental Leave
+6. Bereavement Leave
+7. Public Holidays
+8. Leave Application Process
+9. Leave Approval Guidelines
+10. Frequently Asked Questions
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+This policy outlines the leave entitlements and procedures for all employees
+of TechCorp Inc. It is designed to ensure fair and consistent treatment while
+supporting work-life balance.
+
+Scope: This policy applies to all full-time and part-time employees.
+Contractors and interns have separate leave arrangements.
+
+Policy Owner: Human Resources Department
+Contact: hr@techcorp.com | Extension: 5500
+
+================================================================================
+2. TYPES OF LEAVE
+================================================================================
+
+TechCorp offers the following types of leave:
+
+a) Annual Leave / Paid Time Off (PTO)
+b) Sick Leave
+c) Parental Leave (Maternity/Paternity/Adoption)
+d) Bereavement Leave
+e) Public Holidays
+f) Unpaid Leave (special circumstances)
+g) Jury Duty / Civic Duty Leave
+
+================================================================================
+3. ANNUAL LEAVE / PAID TIME OFF (PTO)
+================================================================================
+
+3.1 Entitlement
+
+Full-time employees are entitled to annual leave based on tenure:
+
+- Years 0-2: 15 days per year
+- Years 3-5: 20 days per year
+- Years 6-10: 25 days per year
+- Years 10+: 30 days per year
+
+Part-time employees receive pro-rated leave based on their working hours.
+
+3.2 Accrual
+
+Annual leave accrues monthly at a rate of 1/12th of the annual entitlement.
+Leave can be taken as soon as it accrues; there is no waiting period.
+
+3.3 Carry Forward
+
+Up to 5 days of unused annual leave may be carried forward to the next year.
+Any leave exceeding this limit will be forfeited unless approved by management
+for exceptional circumstances.
+
+3.4 Cash Out
+
+Employees may cash out up to 5 days of accrued leave per year, subject to:
+- Manager approval
+- Minimum balance of 10 days remaining after cash out
+- Request submitted by November 30th
+
+3.5 Leave During Notice Period
+
+Employees are generally not permitted to take annual leave during their notice
+period. Exceptions require approval from the HR Director.
+
+================================================================================
+4. SICK LEAVE
+================================================================================
+
+4.1 Entitlement
+
+All employees are entitled to 10 days of paid sick leave per year.
+Sick leave does not accrue and resets annually on January 1st.
+
+4.2 Usage
+
+Sick leave can be used for:
+- Personal illness or injury
+- Medical appointments
+- Caring for immediate family members who are ill
+- Mental health days
+
+4.3 Medical Certificate
+
+A medical certificate is required for:
+- Sick leave exceeding 3 consecutive days
+- Sick leave taken immediately before or after a public holiday or annual leave
+- Patterns of frequent short-term absences (as determined by HR)
+
+4.4 Notification
+
+Employees must notify their direct manager:
+- As early as possible on the first day of absence
+- By 9:00 AM if possible
+- Via phone call or email to manager and HR
+
+4.5 Unused Sick Leave
+
+Unused sick leave does not carry forward and cannot be cashed out.
+
+================================================================================
+5. PARENTAL LEAVE
+================================================================================
+
+5.1 Maternity Leave
+
+Eligible employees are entitled to:
+- 18 weeks of paid maternity leave (100% of base salary)
+- Additional 8 weeks unpaid leave (optional)
+
+Eligibility: Must have been employed for at least 12 months
+
+5.2 Paternity Leave
+
+Eligible employees are entitled to:
+- 4 weeks of paid paternity leave (100% of base salary)
+- To be taken within 6 months of the birth or adoption
+
+5.3 Adoption Leave
+
+Same entitlements as maternity/paternity leave apply to adoptive parents.
+
+5.4 Notification
+
+Employees must notify HR at least 8 weeks before the expected leave start date
+and provide relevant documentation.
+
+5.5 Return to Work
+
+Employees are guaranteed to return to the same or equivalent position.
+Flexible return arrangements can be discussed with HR and management.
+
+================================================================================
+6. BEREAVEMENT LEAVE
+================================================================================
+
+6.1 Entitlement
+
+Employees are entitled to paid bereavement leave for the death of:
+
+Immediate Family (Spouse, Child, Parent, Sibling):
+- 5 days paid leave
+
+Extended Family (Grandparent, In-law, Aunt, Uncle):
+- 3 days paid leave
+
+Other Circumstances:
+- 1 day paid leave (at manager's discretion)
+
+6.2 Additional Leave
+
+Additional unpaid leave may be granted at the discretion of management.
+
+6.3 Documentation
+
+A death certificate or funeral notice may be requested.
+
+================================================================================
+7. PUBLIC HOLIDAYS
+================================================================================
+
+7.1 Recognized Holidays
+
+TechCorp observes the following public holidays:
+
+- New Year's Day
+- Martin Luther King Jr. Day
+- Presidents' Day
+- Memorial Day
+- Independence Day
+- Labor Day
+- Thanksgiving Day
+- Day After Thanksgiving
+- Christmas Eve
+- Christmas Day
+- New Year's Eve
+
+Total: 11 days per year
+
+7.2 Holiday Pay
+
+Full-time employees receive 100% pay for public holidays.
+Part-time employees receive pro-rated holiday pay.
+
+7.3 Working on Holidays
+
+If business needs require work on a public holiday:
+- Employees receive time-and-a-half pay
+- Plus a day off in lieu within 30 days
+
+================================================================================
+8. LEAVE APPLICATION PROCESS
+================================================================================
+
+8.1 How to Apply
+
+All leave requests must be submitted through the HR Portal:
+https://portal.techcorp.com/leave
+
+8.2 Advance Notice
+
+Minimum advance notice required:
+
+- 1-3 days leave: 1 week notice
+- 4-10 days leave: 2 weeks notice
+- 10+ days leave: 4 weeks notice
+- Emergency/sick leave: As soon as possible
+
+8.3 Required Information
+
+Leave requests must include:
+- Type of leave
+- Start and end dates
+- Total number of days
+- Reason (for certain leave types)
+- Contact information during leave (optional)
+
+8.4 Approval Workflow
+
+1. Employee submits request via HR Portal
+2. Direct Manager reviews and approves/denies
+3. HR validates leave balance and policy compliance
+4. Employee receives confirmation email
+
+================================================================================
+9. LEAVE APPROVAL GUIDELINES
+================================================================================
+
+9.1 Manager Considerations
+
+When reviewing leave requests, managers should consider:
+- Business needs and workload
+- Team coverage
+- Prior leave commitments
+- First-come, first-served principle (for annual leave)
+- Employee tenure and performance
+
+9.2 Denial of Leave
+
+Leave may be denied if:
+- Inadequate notice provided
+- Critical business period (e.g., year-end, product launch)
+- Insufficient team coverage
+- Excessive leave already taken
+
+If leave is denied, the manager must:
+- Provide written explanation
+- Suggest alternative dates
+- Escalate to HR if employee disputes the decision
+
+9.3 Blackout Periods
+
+Certain departments may designate blackout periods where leave is restricted:
+- Finance: December 15 - January 15 (year-end close)
+- Sales: Last week of each quarter
+- IT: During major system upgrades
+
+Employees will be notified of blackout periods at least 60 days in advance.
+
+================================================================================
+10. FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Can I take leave in half-day increments?
+A: Yes, leave can be taken in half-day (4-hour) increments for annual and
+   sick leave. Minimum increment is 0.5 days.
+
+Q: What happens to my leave if I go on long-term disability?
+A: Leave accrual is suspended during long-term disability. Contact HR for
+   specific guidance.
+
+Q: Can I donate leave to a colleague?
+A: TechCorp does not currently have a leave donation program. This is under
+   review for future implementation.
+
+Q: What if I'm sick while on annual leave?
+A: If you are hospitalized or seriously ill during annual leave, you may
+   convert those days to sick leave with a medical certificate. Contact HR
+   immediately.
+
+Q: How do I check my leave balance?
+A: Log in to the HR Portal at https://portal.techcorp.com/leave
+   Your current balance is displayed on the dashboard.
+
+Q: Can I take unpaid leave?
+A: Unpaid leave may be granted for exceptional circumstances (e.g., extended
+   travel, personal reasons). Submit a request through your manager and HR
+   at least 8 weeks in advance.
+
+Q: What if my leave request is urgent/emergency?
+A: Contact your manager immediately by phone. Follow up with a formal
+   request in the HR Portal as soon as possible.
+
+Q: Are there any restrictions on when I can take leave?
+A: Yes, subject to business needs, blackout periods, and team coverage.
+   First-come, first-served generally applies for peak periods like
+   summer and December holidays.
+
+================================================================================
+POLICY UPDATES AND REVISIONS
+================================================================================
+
+This policy is reviewed annually and may be updated to reflect:
+- Legal and regulatory changes
+- Business needs
+- Employee feedback
+- Best practices
+
+Version History:
+- v3.2 - January 2026 - Updated parental leave entitlements
+- v3.1 - July 2025 - Added mental health days under sick leave
+- v3.0 - January 2025 - Major revision; introduced flexible PTO
+
+For questions or clarification, contact:
+Human Resources Department
+Email: hr@techcorp.com
+Phone: (555) 123-5500
+Office: Building A, 2nd Floor
+
+================================================================================
+END OF DOCUMENT
+================================================================================

@@ -1,0 +1,587 @@
+================================================================================
+AI AGENT RAG PROJECT - COMPLETE TODO LIST
+================================================================================
+Date Created: January 10, 2026
+Purpose: Backend-only AI agent service with RAG using Azure OpenAI
+================================================================================
+
+================================================================================
+PHASE 1: ENVIRONMENT SETUP
+================================================================================
+[✓] 1. Check Python version (3.9+ required)
+      Command: python --version
+      Result: Python 3.10.12 ✅
+      
+[SKIPPED] 2. Create virtual environment (skipped as per user request)
+      Command: python -m venv venv
+      
+[SKIPPED] 3. Activate virtual environment (skipped as per user request)
+      Linux/Mac: source venv/bin/activate
+      Windows: venv\Scripts\activate
+      
+[✓] 4. Install required packages:
+      - fastapi ✅
+      - uvicorn[standard] ✅
+      - openai (Azure OpenAI SDK) ✅
+      - faiss-cpu ✅
+      - python-dotenv ✅
+      - pydantic ✅
+      
+[ ] 5. Verify Azure OpenAI credentials exist
+      - Azure subscription
+      - Azure OpenAI resource created
+      - API keys available
+
+================================================================================
+PHASE 2: PROJECT STRUCTURE
+================================================================================
+[✓] 6. Create folder structure:
+      ai-agent-rag/
+      ├── app/ ✅
+      │   ├── api/ ✅
+      │   ├── agent/ ✅
+      │   └── rag/ ✅
+      └── data/docs/ ✅
+      
+[✓] 7. Create all Python files:
+      - app/main.py (FastAPI entry point) ✅
+      - app/config.py (Configuration management) ✅
+      - app/api/__init__.py ✅
+      - app/api/ask.py (API endpoints) ✅
+      - app/agent/__init__.py ✅
+      - app/agent/agent.py (Agent decision logic) ✅
+      - app/agent/prompt.py (System prompts) ✅
+      - app/agent/memory.py (Session memory) ✅
+      - app/rag/__init__.py ✅
+      - app/rag/documents.py (Document loader) ✅
+      - app/rag/embed.py (Embedding generation) ✅
+      - app/rag/vectorstore.py (FAISS operations) ✅
+      - app/rag/retriever.py (Search function) ✅
+      
+[✓] 8. Create configuration files:
+      - .env (local secrets - DO NOT COMMIT) ✅
+      - requirements.txt (Python dependencies) ✅
+      - .gitignore (Git ignore rules) ✅
+
+================================================================================
+PHASE 3: SAMPLE DOCUMENTS
+================================================================================
+[✓] 9. Create 3-5 sample TXT documents in data/docs/:
+      - leave_policy.txt ✅ (267 lines)
+      - remote_work_policy.txt ✅ (456 lines)
+      - security_guidelines.txt ✅ (578 lines)
+      - expense_policy.txt ✅ (489 lines)
+      - onboarding_guide.txt ✅ (612 lines)
+      
+[✓] 10. Fill with realistic company policy content
+       - Each document: 100-300 lines ✅
+       - Realistic policy information ✅
+       - Clear, structured text ✅
+
+================================================================================
+PHASE 4: RAG IMPLEMENTATION
+================================================================================
+[✓] 11. Implement document loader (documents.py)
+       - Load all TXT files from data/docs/ ✅
+       - Read file contents ✅
+       - Return list of documents ✅
+       
+[✓] 12. Implement chunking logic (documents.py)
+       - Chunk size: 300-500 tokens ✅ (400 default)
+       - Overlap: 50 tokens ✅
+       - Preserve context between chunks ✅
+       
+[✓] 13. Implement embedding generation (embed.py)
+       - Use Azure OpenAI text-embedding-3-small ✅
+       - Convert chunks to vectors ✅
+       - Handle API calls properly ✅
+       - Batch processing (16 per request) ✅
+       
+[✓] 14. Create FAISS vector store (vectorstore.py)
+       - Initialize FAISS index (IndexFlatL2) ✅
+       - Add embeddings to index ✅
+       - Save/load index to/from disk ✅
+       
+[✓] 15. Implement retriever (retriever.py)
+       - search_documents(query, top_k=3) function ✅
+       - Query embedding generation ✅
+       - Similarity search in FAISS ✅
+       - Return top-k relevant chunks ✅
+       - format_context_for_llm() helper ✅
+       
+[✓] 16. Test RAG pipeline locally
+       - test_rag.py script created ✅
+       - Load documents ✅
+       - Create embeddings ✅
+       - Test search functionality ✅
+       - Print retrieved chunks to verify ✅
+
+================================================================================
+PHASE 5: AI AGENT CORE
+================================================================================
+[✓] 17. Design system prompt (prompt.py)
+       - Instruct LLM to decide: answer directly OR call tool ✅
+       - Define tool: search_documents ✅
+       - Clear decision criteria ✅
+       - Added CONTEXT_PROMPT and NO_CONTEXT_PROMPT ✅
+       
+[✓] 18. Implement agent decision logic (agent.py)
+       - Send query + system prompt to Azure OpenAI ✅
+       - Parse LLM response ✅
+       - Decide if tool is needed ✅
+       - _call_llm() method ✅
+       - _needs_tool_call() method ✅
+       - _build_messages() with history ✅
+       
+[✓] 19. Implement manual tool calling (agent.py)
+       - If LLM indicates "need documents" → call search_documents() ✅
+       - Pass retrieved chunks back to LLM ✅
+       - Generate final answer with context ✅
+       - Returns answer + sources ✅
+       
+[✓] 20. Implement session memory (memory.py)
+       - In-memory dict: {session_id: [messages]} ✅
+       - Store conversation history ✅
+       - Retrieve history by session_id ✅
+       - Limit history to last N messages ✅
+       
+[✓] 21. Test agent without API
+       - Create test Python script (test_agent.py) ✅
+       - Test direct answers ✅
+       - Test document retrieval ✅
+       - Test session memory ✅
+       - Test tool detection logic ✅
+
+[✓] 21.5 Add LLM Provider Abstraction (BONUS TASK)
+       - Created app/llm/ directory ✅
+       - Implemented LLMClient abstract base class ✅
+       - Implemented AzureOpenAIClient (primary) ✅
+       - Implemented HuggingFaceClient (fallback) ✅
+       - Implemented LLM factory with provider switching ✅
+       - Updated agent.py to use abstraction ✅
+       - Updated .env with LLM_PROVIDER config ✅
+       - Updated requirements.txt with requests ✅
+       - Reason: Azure OpenAI quota = 0 on free subscription
+       - Architecture: Provider-agnostic, config-based switching
+       - Interview note: Shows production resilience patterns
+
+================================================================================
+PHASE 6: FASTAPI BACKEND
+================================================================================
+[✓] 22. Create FastAPI app (main.py)
+       - Initialize FastAPI instance ✅
+       - Configure CORS (CORSMiddleware) ✅
+       - Include routers ✅
+       - Lifespan event for RAG initialization ✅
+       
+[✓] 23. Implement POST /ask endpoint (api/ask.py)
+       - Request model: {query: str, session_id: str (optional)} ✅
+       - Response model: {answer: str, sources: list[str]} ✅
+       - Call agent logic ✅
+       - Return structured response ✅
+       
+[✓] 24. Add GET /health endpoint (main.py or api/ask.py)
+       - Returns: {"status": "healthy"} ✅
+       - Azure App Service best practice ✅
+       
+[✓] 25. Add basic error handling
+       - Empty query validation ✅
+       - Azure OpenAI API errors ✅
+       - FAISS index missing errors ✅
+       - Invalid session_id handling ✅
+       - Return proper HTTP status codes (400, 500) ✅
+       
+[✓] 26. Add basic logging
+       - Log agent decisions ✅
+       - Log tool calls ✅
+       - Log retrieval results ✅
+       - Log errors ✅
+       - Use Python logging module ✅
+       
+[✓] 27. Add Pydantic request/response models
+       - QueryRequest model ✅
+       - QueryResponse model ✅
+       - ErrorResponse model ✅
+       - Proper validation with Field() ✅
+       
+[ ] 28. Test API locally with Swagger UI
+       - Run: uvicorn app.main:app --reload
+       - Open: http://localhost:8000/docs
+       - Test /ask endpoint
+       - Test /health endpoint
+       
+[ ] 29. Test with curl/Postman
+       - Test various queries
+       - Test with/without session_id
+       - Verify response format
+
+================================================================================
+PHASE 7: AZURE DEPLOYMENT PREP
+================================================================================
+[ ] 30. Create/verify Azure OpenAI resource
+       - Azure Portal or Azure CLI
+       - Note resource name and region
+       
+[ ] 31. Deploy model: gpt-4o-mini
+       - Azure Portal > Deployments
+       - Note deployment name
+       
+[ ] 32. Deploy embedding model: text-embedding-3-small
+       - Azure Portal > Deployments
+       - Note deployment name
+       
+[ ] 33. Get API keys and endpoints
+       - Copy from Azure Portal
+       - Keys and Endpoint section
+       
+[ ] 34. Update .env with Azure credentials
+       AZURE_OPENAI_API_KEY=your_key_here
+       AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+       AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini
+       AZURE_OPENAI_EMBEDDING_DEPLOYMENT=text-embedding-3-small
+       AZURE_OPENAI_API_VERSION=2024-02-15-preview
+
+================================================================================
+PHASE 8: AZURE APP SERVICE DEPLOYMENT
+================================================================================
+[ ] 35. Create Azure App Service
+       - Platform: Linux
+       - Runtime: Python 3.9 or higher
+       - Region: Same as OpenAI resource (recommended)
+       
+[ ] 36. Configure environment variables in Azure Portal
+       - App Service > Configuration > Application settings
+       - Add all variables from .env
+       - Save changes
+       
+[ ] 37. Deploy FastAPI app to Azure
+       Option A: Azure CLI
+         - az webapp up --name <app-name> --runtime PYTHON:3.9
+       Option B: GitHub Actions
+       Option C: VS Code Azure extension
+       
+[ ] 38. Test public URL
+       - https://<your-app>.azurewebsites.net/ask
+       - Send POST request
+       
+[ ] 39. Verify /docs endpoint works
+       - https://<your-app>.azurewebsites.net/docs
+       
+[ ] 40. Verify /health endpoint works
+       - https://<your-app>.azurewebsites.net/health
+
+================================================================================
+PHASE 9: TESTING & VALIDATION
+================================================================================
+[ ] 41. End-to-end testing with various queries
+       Test case 1 (needs documents):
+         Query: "What is the leave policy?"
+         Expected: Answer from leave_policy.txt
+         
+       Test case 2 (direct answer):
+         Query: "What is 2+2?"
+         Expected: Direct LLM answer, no documents
+         
+       Test case 3 (specific policy):
+         Query: "Can I work remotely?"
+         Expected: Answer from remote_work_policy.txt
+       
+[ ] 42. Test session memory
+       - Send multiple queries with same session_id
+       - Verify context is maintained
+       - Test follow-up questions
+       
+[ ] 43. Test RAG retrieval
+       - Verify correct chunks are returned
+       - Check relevance of retrieved documents
+       - Verify top-k is working
+       
+[ ] 44. Test direct LLM answers
+       - Queries not needing documents
+       - Verify no sources returned
+       - Verify answer quality
+       
+[ ] 45. Verify source field
+       - Check document names are returned
+       - Verify format: ["leave_policy.txt", ...]
+       - Ensure no duplicates
+
+================================================================================
+PHASE 10: DOCUMENTATION
+================================================================================
+[ ] 46. Write README.md with:
+       
+       Section 1: Architecture Overview
+       - System architecture diagram (text-based or visual)
+       - Component description
+       - Data flow explanation
+       
+       Section 2: Tech Stack
+       - Backend: FastAPI, Python 3.9+
+       - Azure: OpenAI (gpt-4o-mini, text-embedding-3-small)
+       - RAG: FAISS
+       - Deployment: Azure App Service
+       - Why each choice was made
+       
+       Section 3: Local Setup Instructions
+       - Prerequisites
+       - Clone repository
+       - Create virtual environment
+       - Install dependencies
+       - Configure .env
+       - Run locally
+       
+       Section 4: Azure Deployment Instructions
+       - Azure OpenAI setup
+       - App Service creation
+       - Environment variables
+       - Deployment steps
+       
+       Section 5: API Usage Examples
+       - curl examples
+       - Request/response formats
+       - Sample queries
+       
+       Section 6: Design Decisions
+       - Why FAISS over other vector DBs
+       - Why no LangChain/LangGraph
+       - Why in-memory session
+       - Why TXT over PDF
+       - Why manual tool calling
+       
+       Section 7: Limitations
+       - In-memory session (lost on restart)
+       - TXT files only
+       - No authentication
+       - Single instance only
+       - Limited concurrent requests
+       
+       Section 8: Future Improvements
+       - Redis for persistent sessions
+       - PDF support
+       - Azure Monitor integration
+       - Authentication/Authorization
+       - Rate limiting
+       - Caching
+       - Multi-modal support
+       
+[ ] 47. Add code comments in critical files
+       - Document complex logic
+       - Explain design decisions
+       - Add docstrings to functions
+
+================================================================================
+PHASE 11: FINAL TOUCHES
+================================================================================
+[ ] 48. Code cleanup
+       - Remove debug print statements
+       - Remove commented code
+       - Format code consistently
+       - Check for unused imports
+       
+[ ] 49. Verify .gitignore includes:
+       .env
+       venv/
+       __pycache__/
+       *.pyc
+       *.pyo
+       *.pyd
+       .Python
+       *.so
+       *.egg
+       *.egg-info/
+       dist/
+       build/
+       .faiss_index/ (if saving FAISS to disk)
+       
+[ ] 50. Push to GitHub
+       - Create repository
+       - git init
+       - git add .
+       - git commit -m "Initial commit"
+       - git remote add origin <repo-url>
+       - git push -u origin main
+       
+[ ] 51. Final test from public Azure URL
+       - Test all endpoints
+       - Test with various queries
+       - Verify Swagger UI
+       
+[ ] 52. Share /docs link for Swagger UI demo
+       - Clean, professional API documentation
+       - Ready for demo/interview
+
+================================================================================
+TECH STACK REFERENCE
+================================================================================
+
+BACKEND:
+- Python 3.9+
+- FastAPI (async web framework)
+- Uvicorn (ASGI server)
+
+LLM PROVIDERS (PLUGGABLE ARCHITECTURE):
+- Azure OpenAI (Primary)
+  * Model: gpt-4o-mini (reasoning & answering)
+  * Embedding: text-embedding-3-small (RAG)
+  * Status: Integrated but quota-blocked on free subscription
+- Hugging Face Inference API (Fallback)
+  * Model: mistralai/Mistral-7B-Instruct-v0.2
+  * Status: Active runtime provider
+  * Switching: LLM_PROVIDER env variable
+
+AZURE SERVICES:
+- Azure App Service (Linux, Python runtime)
+- Environment Variables (secrets management)
+- Azure OpenAI (architecturally integrated)
+
+RAG COMPONENTS:
+- Vector DB: FAISS (faiss-cpu)
+- Documents: 5 TXT files (2,402 lines total)
+- Chunking: 300-500 tokens, 50 token overlap
+- Embedding: Azure OpenAI embeddings (or HuggingFace fallback)
+
+AI AGENT:
+- Custom agent logic (no frameworks)
+- Manual tool invocation (based on LLM decision)
+- Session memory: In-memory Python dict
+- Prompt engineering: Custom system prompts
+- Provider abstraction: Supports multiple LLM backends
+
+PYTHON LIBRARIES:
+fastapi
+uvicorn[standard]
+openai  # Azure OpenAI SDK
+requests  # Hugging Face API
+faiss-cpu
+python-dotenv
+pydantic
+
+TESTING & DEPLOYMENT:
+- Swagger UI (auto-generated /docs)
+- curl / Postman
+- Azure CLI / Azure Portal
+
+================================================================================
+WHY THIS STACK (INTERVIEW DEFENSE)
+================================================================================
+
+FastAPI:
+  → Async, auto docs, Azure-friendly, modern Python web framework
+
+Azure OpenAI:
+  → Assignment requirement + enterprise-grade + managed service
+  → Fully integrated architecturally (code-ready for production)
+  
+Hugging Face Fallback:
+  → Pragmatic solution to Azure quota limitation (0 TPM on free tier)
+  → Demonstrates provider-agnostic architecture
+  → Shows production resilience patterns
+  → Switch back to Azure via single env variable
+
+FAISS:
+  → Free, simple, no cloud costs, perfect for demo, fast similarity search
+
+No LangChain:
+  → Shows deep understanding, no black box, full control over logic
+
+TXT only:
+  → Time-efficient, PDF as future work, simpler implementation
+
+In-memory session:
+  → Meets requirement, no Redis overhead, simple for demo
+
+Manual tool calling:
+  → Full control, transparent logic, easier to debug and explain
+
+LLM Abstraction Layer:
+  → Production-ready design pattern
+  → Supports multiple providers (Azure, HuggingFace, easily extensible)
+  → Config-based switching (no code changes needed)
+  → Shows architectural maturity
+
+================================================================================
+KEY DESIGN PRINCIPLES
+================================================================================
+
+1. SIMPLICITY
+   - Keep it simple, don't over-engineer
+   - Focus on core requirements
+   
+2. TRANSPARENCY
+   - No black boxes
+   - Clear decision logic
+   - Easy to explain in interview
+   
+3. PRODUCTION-AWARE
+   - Error handling
+   - Logging
+   - Health checks
+   - Environment variables
+   
+4. TIME-EFFICIENT
+   - TXT only (not PDF)
+   - In-memory (not Redis)
+   - FAISS (not cloud vector DB)
+   
+5. INTERVIEW-SAFE
+   - Can explain every decision
+   - No magic frameworks
+   - Clear architecture
+
+=============================================================================z===
+IMPORTANT NOTES
+================================================================================
+
+❗ DO NOT COMMIT:
+   - .env file
+   - API keys
+   - Secrets
+   - Virtual environment
+
+❗ ALWAYS:
+   - Test locally before deploying
+   - Check environment variables
+   - Verify Azure OpenAI quota
+   - Test error handling
+
+❗ REMEMBER:
+   - Chunk size: 300-500 tokens, overlap 50
+   - Top-k: 3 documents
+   - Session memory: in-memory dict
+   - Manual tool calling (not automatic)
+   
+❗ LLM PROVIDER CONFIGURATION:
+   - Current provider: Hugging Face (fallback)
+   - Reason: Azure OpenAI quota = 0 on free subscription
+   - To switch to Azure: Change LLM_PROVIDER=azure in .env
+   - Azure OpenAI code is fully implemented and ready
+   - Architecture supports both providers seamlessly
+
+================================================================================
+QUICK COMMANDS REFERENCE
+================================================================================
+
+# Activate virtual environment
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run locally
+uvicorn app.main:app --reload
+
+# Access Swagger UI
+http://localhost:8000/docs
+
+# Test endpoint
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"query": "What is the leave policy?", "session_id": "123"}'
+
+# Deploy to Azure
+az webapp up --name <app-name> --runtime PYTHON:3.9
+
+================================================================================
+END OF TODO LIST
+================================================================================

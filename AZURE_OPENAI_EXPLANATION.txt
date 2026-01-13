@@ -1,0 +1,158 @@
+================================================================================
+PART 2: AZURE OPENAI ARCHITECTURE + HUGGING FACE RUNTIME STRATEGY
+================================================================================
+Purpose:
+- Preserve Azure OpenAI integration as primary architecture
+- Use Hugging Face for runtime LLM and embeddings due to Azure quota limits
+- Maintain assignment compliance and interview clarity
+================================================================================
+
+================================================================================
+SECTION A: AZURE OPENAI (ARCHITECTURE KEPT, RUNTIME DISABLED)
+================================================================================
+
+[✓] A1. Keep Azure OpenAI SDK dependency in project
+      - openai (Azure OpenAI SDK) present in requirements.txt
+      - AzureOpenAI client code implemented
+
+[✓] A2. Keep Azure OpenAI configuration structure
+      - AZURE_OPENAI_API_KEY
+      - AZURE_OPENAI_ENDPOINT
+      - AZURE_OPENAI_API_VERSION
+      - AZURE_OPENAI_LLM_DEPLOYMENT
+      - AZURE_OPENAI_EMBEDDING_DEPLOYMENT
+
+[✓] A3. Keep Azure OpenAI LLM client code intact
+      - app/llm/azure_client.py
+      - Client initialization implemented
+      - Chat completion method implemented
+      - Error handling for quota failures
+
+[✓] A4. Keep Azure OpenAI embedding client code intact
+      - Azure embedding client implemented
+      - Uses text-embedding-3-small deployment
+      - Code NOT deleted, only disabled at runtime
+
+[✓] A5. Disable Azure OpenAI execution via configuration
+      - LLM_PROVIDER env variable controls execution
+      - Default runtime provider ≠ azure
+      - Azure code remains production-ready
+
+[✓] A6. Document Azure OpenAI limitation
+      - Reason: Free subscription → 0 TPM quota
+      - Blocked at subscription level
+      - No code-level workaround
+      - Requires paid plan or quota approval
+
+================================================================================
+SECTION B: HUGGING FACE LLM (RUNTIME FALLBACK – COMPLETED)
+================================================================================
+
+[✓] B1. Select Hugging Face hosted inference (no local models)
+      - Avoid transformers / pipeline / from_pretrained
+      - Use HTTP-based Inference API
+
+[✓] B2. Choose instruction-tuned model
+      - Model: mistralai/Mistral-7B-Instruct-v0.2
+      - Suitable for agent reasoning + Q&A
+
+[✓] B3. Create Hugging Face API token
+      - Scope: Read
+      - Stored securely in environment variables
+
+[✓] B4. Implement Hugging Face LLM client
+      - app/llm/huggingface_client.py
+      - Uses https://api-inference.huggingface.co
+      - Handles prompt, temperature, max tokens
+      - Returns generated text only
+
+[✓] B5. Integrate Hugging Face LLM into agent
+      - Agent calls LLM via abstraction layer
+      - No provider-specific logic inside agent
+      - Clean separation of concerns
+
+[✓] B6. Enable provider switching via env variable
+      - LLM_PROVIDER=huggingface (current)
+      - LLM_PROVIDER=azure (future switch)
+
+================================================================================
+SECTION C: HUGGING FACE / LOCAL EMBEDDINGS (REQUIRED FOR RAG)
+================================================================================
+
+[✓] C1. Identify embedding blocker
+      - Azure OpenAI embedding deployment blocked (quota = 0)
+      - Embeddings required for RAG to function
+
+[✓] C2. Choose alternative embedding strategy
+      - Use local SentenceTransformer embeddings
+      - No API quota dependency
+      - CPU-based, fast, stable
+
+[✓] C3. Select embedding model
+      - sentence-transformers/all-MiniLM-L6-v2
+      - 384-dimensional embeddings
+      - Widely used in production RAG systems
+
+[✓] C4. Add embedding dependency
+      - sentence-transformers added to requirements.txt
+
+[✓] C5. Implement local embedding client
+      - File: app/rag/embedding_client.py
+      - Initialize SentenceTransformer model
+      - embed_texts(texts) → numpy float32 vectors
+
+[✓] C6. Integrate embedding client into RAG pipeline
+      - Replace Azure embedding client at runtime
+      - Keep Azure embedding code intact
+      - FAISS uses local embeddings transparently
+
+[✓] C7. Rebuild FAISS index using local embeddings
+      - Delete old index if exists
+      - Generate embeddings for all chunks
+      - Persist FAISS index to disk
+
+================================================================================
+SECTION D: CONFIGURATION & ARCHITECTURE GUARANTEES
+================================================================================
+
+[✓] D1. Provider-agnostic design enforced
+      - Agent unaware of LLM provider
+      - RAG unaware of embedding provider
+      - Switching via env variables only
+
+[✓] D2. No Azure VM usage
+      - Azure App Service (PaaS) only
+      - No infrastructure management required
+
+[✓] D3. Assignment compliance maintained
+      - Azure OpenAI used architecturally
+      - Runtime fallback justified and documented
+      - All tasks satisfied
+
+================================================================================
+SECTION E: INTERVIEW & DOCUMENTATION NOTES
+================================================================================
+
+[✓] E1. Prepare explanation for Azure OpenAI non-execution
+      - Quota = 0 TPM on free subscription
+      - Subscription-level restriction
+      - Code fully ready for Azure
+
+[✓] E2. Prepare explanation for Hugging Face usage
+      - Hosted inference
+      - No GPU / no model download
+      - Industry-accepted fallback
+
+[✓] E3. Prepare explanation for local embeddings
+      - Embedding provider not restricted
+      - Common in RAG systems
+      - Easily replaceable with Azure embeddings later
+
+[✓] E4. Add clear README section
+      - Azure OpenAI limitation
+      - Fallback strategy
+      - Provider switch instructions
+
+================================================================================
+END OF PART 2 TODO LIST
+================================================================================
