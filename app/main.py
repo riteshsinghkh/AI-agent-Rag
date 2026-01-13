@@ -73,7 +73,7 @@ This API provides an intelligent assistant that can:
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify allowed origins
+    allow_origins=["https://wonderful-sky-0b2ff020f.1.azurestaticapps.net"],  # In production, specify allowed origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
