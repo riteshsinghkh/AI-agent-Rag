@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent Chat</title>
+    <title>DocMind AI</title>
     <style>
         * {
             margin: 0;
@@ -117,6 +117,7 @@
         .input-container {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
         #questionInput {
@@ -160,6 +161,36 @@
             transform: none;
         }
 
+        #uploadButton {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: #667eea;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        #uploadButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(102, 126, 234, 0.25);
+            border-color: #667eea;
+        }
+
+        #uploadButton:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         .loading {
             display: inline-block;
             width: 20px;
@@ -173,12 +204,6 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            background: #fee;
-            color: #c33;
-            border: 1px solid #fcc !important;
         }
 
         .welcome {
@@ -217,30 +242,79 @@
             background: #667eea;
             color: white;
         }
+
+        .upload-status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .extract-area {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        .extract-area label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .extract-input {
+            width: 100%;
+            min-height: 72px;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 13px;
+            outline: none;
+            resize: vertical;
+        }
+
+        .extract-button {
+            margin-top: 8px;
+            padding: 8px 14px;
+            background: #ffffff;
+            color: #667eea;
+            border: 1px solid #667eea;
+            border-radius: 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .chunk-snippet {
+            margin-top: 8px;
+            padding: 8px 10px;
+            background: #f9f9f9;
+            border: 1px solid #ededed;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #444;
+            white-space: pre-wrap;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🤖 AI Agent Assistant</h1>
-            <p>Ask me anything about company policies</p>
+            <h1>DocMind AI</h1>
+            <p>Smart Document Reasoning</p>
         </div>
 
         <div class="chat-area" id="chatArea">
             <div class="welcome">
                 <h2>👋 Welcome!</h2>
                 <p>I can help you with company policies, guidelines, and procedures.</p>
-                <div class="example-questions">
-                    <p style="margin-bottom: 10px;"><strong>Try asking:</strong></p>
-                    <span class="example-btn" onclick="askExample('What is the leave policy?')">What is the leave policy?</span>
-                    <span class="example-btn" onclick="askExample('How does remote work policy work?')">Remote work policy?</span>
-                    <span class="example-btn" onclick="askExample('What are the security guidelines?')">Security guidelines?</span>
-                </div>
             </div>
         </div>
 
         <div class="input-area">
             <div class="input-container">
+                <button id="uploadButton" title="Upload documents">+</button>
+                <input type="file" id="uploadInput" multiple style="display:none" />
                 <input 
                     type="text" 
                     id="questionInput" 
@@ -249,13 +323,27 @@
                 />
                 <button id="askButton" onclick="askQuestion()">Send</button>
             </div>
+            <div class="upload-status" id="uploadStatus"></div>
+            <div class="extract-area">
+                <label for="extractInput">Extract data (paste text or leave empty to use latest upload)</label>
+                <textarea class="extract-input" id="extractInput" placeholder="Optional: paste document text..."></textarea>
+                <button class="extract-button" id="extractButton">Extract</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Configuration (ONLY THIS LINE CHANGED)
-        const API_URL = 'https://ritesh-ai-agent-rag.azurewebsites.net/ask';
+        const API_BASE = window.location.origin;
+        const API_URL = `${API_BASE}/ask`;
+        const UPLOAD_URL = `${API_BASE}/upload`;
+        const EXTRACT_URL = `${API_BASE}/extract`;
         const SESSION_ID = 'user-' + Math.random().toString(36).substring(7);
+
+        const uploadInput = document.getElementById('uploadInput');
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const extractInput = document.getElementById('extractInput');
+        const extractButton = document.getElementById('extractButton');
 
         function addUserMessage(message) {
             const chatArea = document.getElementById('chatArea');
@@ -269,19 +357,35 @@
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        function addAgentMessage(answer, sources = []) {
+        function addAgentMessage(answer, sources = [], confidence = null, chunks = []) {
             const chatArea = document.getElementById('chatArea');
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message agent';
             
             let sourcesHtml = '';
             if (sources && sources.length > 0) {
-                sourcesHtml = `<div class="sources"><strong>📚 Sources:</strong> ${sources.join(', ')}</div>`;
+                const confidenceText = confidence !== null && confidence !== undefined
+                    ? ` | Confidence: ${Math.round(confidence * 100)}%`
+                    : '';
+                sourcesHtml = `<div class="sources"><strong>📚 Sources:</strong> ${sources.join(', ')}${confidenceText}</div>`;
+            }
+
+            let chunkHtml = '';
+            if (chunks && chunks.length > 0) {
+                const shown = chunks.slice(0, 2);
+                const maxChars = 400;
+                chunkHtml = shown.map((item, index) => {
+                    const source = item.source ? `Source: ${item.source}` : `Chunk ${index + 1}`;
+                    const text = item.chunk || '';
+                    const preview = text.length > maxChars ? `${text.slice(0, maxChars)}...` : text;
+                    return `<div class="chunk-snippet"><strong>${escapeHtml(source)}</strong>\n${escapeHtml(preview)}</div>`;
+                }).join('');
             }
             
             messageDiv.innerHTML = `
-                <div class="message-content">${escapeHtml(answer)}</div>
+                <div class="message-content">${formatAgentText(answer)}</div>
                 ${sourcesHtml}
+                ${chunkHtml}
             `;
             chatArea.appendChild(messageDiv);
             chatArea.scrollTop = chatArea.scrollHeight;
@@ -306,6 +410,30 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        function formatAgentText(text) {
+            const raw = (text || '').replace(/\r\n/g, '\n');
+            const withBullet = raw.replace(/(^|\n)\*\s+/g, '$1• ');
+            const withLineBreaks = withBullet
+                .replace(/\s•\s+/g, '\n• ')
+                .replace(/\s\*\*/g, '\n**')
+                .replace(/\*\*\s+/g, '**\n');
+
+            const boldTokens = [];
+            const tokenized = withLineBreaks.replace(/\*\*(.+?)\*\*/g, (match, text) => {
+                const token = `__BOLD_${boldTokens.length}__`;
+                boldTokens.push(text);
+                return token;
+            });
+
+            let safe = escapeHtml(tokenized);
+            boldTokens.forEach((value, index) => {
+                const token = `__BOLD_${index}__`;
+                safe = safe.replace(token, `<strong>${escapeHtml(value)}</strong>`);
+            });
+
+            return safe.replace(/\n/g, '<br>');
         }
 
         function handleKeyPress(event) {
@@ -343,7 +471,7 @@
                 }
 
                 const data = await response.json();
-                addAgentMessage(data.answer, data.sources);
+                addAgentMessage(data.answer, data.sources, data.confidence, data.chunks || []);
 
             } catch (error) {
                 removeLoadingMessage();
@@ -356,6 +484,74 @@
                 input.focus();
             }
         }
+
+        async function uploadFiles(files) {
+            if (!files || !files.length) {
+                return;
+            }
+
+            uploadButton.disabled = true;
+            uploadStatus.textContent = 'Uploading...';
+
+            const formData = new FormData();
+            Array.from(files).forEach((file) => formData.append('files', file));
+
+            try {
+                const response = await fetch(UPLOAD_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    uploadStatus.textContent = 'Upload failed.';
+                    addAgentMessage('Upload failed.', [], null);
+                    return;
+                }
+
+                uploadStatus.textContent = 'Upload complete.';
+                addAgentMessage(`Uploaded ${data.stored_files.length} file(s).`, [], null);
+            } catch (error) {
+                uploadStatus.textContent = 'Upload failed.';
+                addAgentMessage('Upload failed. Check the server.', [], null);
+            } finally {
+                uploadButton.disabled = false;
+            }
+        }
+
+        uploadButton.addEventListener('click', () => {
+            uploadInput.click();
+        });
+
+        uploadInput.addEventListener('change', (event) => {
+            uploadFiles(event.target.files);
+            uploadInput.value = '';
+        });
+
+        extractButton.addEventListener('click', async () => {
+            const text = extractInput.value.trim();
+            const payload = text ? { text, use_latest_upload: false } : { use_latest_upload: true };
+
+            extractButton.disabled = true;
+            try {
+                const response = await fetch(EXTRACT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    addAgentMessage('Extraction failed.', [], null);
+                } else {
+                    addAgentMessage(`Extraction result:\n${JSON.stringify(data, null, 2)}`, [], null);
+                }
+            } catch (error) {
+                addAgentMessage('Extraction failed. Check the server.', [], null);
+            } finally {
+                extractButton.disabled = false;
+            }
+        });
 
         function askExample(question) {
             document.getElementById('questionInput').value = question;

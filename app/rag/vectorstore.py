@@ -78,6 +78,11 @@ class VectorStore:
         
         # Convert to numpy
         embeddings_array = np.array(embeddings, dtype=np.float32)
+
+        if embeddings_array.shape[1] != self.dimension:
+            raise ValueError(
+                f"Embedding dimension {embeddings_array.shape[1]} does not match index dimension {self.dimension}"
+            )
         
         # Add to index
         self.index.add(embeddings_array)

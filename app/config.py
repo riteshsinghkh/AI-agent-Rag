@@ -24,6 +24,14 @@ class Settings:
     CHUNK_SIZE: int = 400  # tokens
     CHUNK_OVERLAP: int = 50  # tokens
     TOP_K: int = 3  # number of documents to retrieve
+    CONFIDENCE_THRESHOLD: float = float(os.getenv("CONFIDENCE_THRESHOLD", "0.35"))
+
+    # Seed docs
+    SEED_DOCS: bool = os.getenv("SEED_DOCS", "false").strip().lower() in {"1", "true", "yes"}
+
+    # Uploads
+    UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "data/uploads")
+    MAX_UPLOAD_MB: int = int(os.getenv("MAX_UPLOAD_MB", "10"))
     
     # Session Memory Configuration
     MAX_HISTORY_MESSAGES: int = 10

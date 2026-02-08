@@ -4,6 +4,7 @@ High-level interface for searching documents.
 """
 
 from typing import List, Dict
+from pathlib import Path
 
 # --- SAFE embedding backend check (REQUIRED CHANGE) ---
 try:
@@ -14,7 +15,9 @@ except ImportError:
     _RAG_ENABLED = False
 
 from app.rag.vectorstore import get_vector_store, VectorStore
-from app.rag.documents import load_and_chunk_documents
+from app.rag.documents import load_and_chunk_documents, chunk_text
+from app.rag.parsing import parse_document
+from app.config import settings
 
 
 # Default settings
@@ -107,7 +110,7 @@ def search_documents(query: str, top_k: int = None) -> List[Dict]:
     if not vector_store.is_initialized:
         # Try to load from disk
         if not vector_store.load():
-            raise ValueError("Vector store not initialized. Call initialize_rag() first.")
+            return []
     
     # Generate query embedding
     embedding_client = get_embedding_client()
@@ -120,14 +123,46 @@ def search_documents(query: str, top_k: int = None) -> List[Dict]:
     # Format results
     formatted_results = []
     for result in results:
+        confidence = score_to_confidence(result["score"])
         formatted_results.append({
             "chunk": result["chunk"],
             "source": result["metadata"]["source"],
             "chunk_index": result["metadata"]["chunk_index"],
-            "score": result["score"]
+            "score": result["score"],
+            "confidence": confidence
         })
     
     return formatted_results
+
+
+def has_index_data() -> bool:
+    """Return True when the vector store has indexed data."""
+    if not _RAG_ENABLED:
+        return False
+
+    vector_store = get_vector_store()
+    if not vector_store.is_initialized:
+        if not vector_store.load():
+            return False
+
+    return vector_store.size > 0
+
+
+def score_to_confidence(score: float) -> float:
+    """
+    Convert L2 distance score to a confidence value in [0, 1].
+    Lower distance implies higher confidence.
+    """
+    if score < 0:
+        return 0.0
+    return 1.0 / (1.0 + score)
+
+
+def get_max_confidence(results: List[Dict]) -> float:
+    """Return the highest confidence value from results."""
+    if not results:
+        return 0.0
+    return max(result.get("confidence", 0.0) for result in results)
 
 
 def get_unique_sources(results: List[Dict]) -> List[str]:
@@ -172,3 +207,71 @@ def format_context_for_llm(results: List[Dict]) -> str:
         context_parts.append(f"[Document {i}: {source}]\n{chunk}")
     
     return "\n\n---\n\n".join(context_parts)
+
+
+def ingest_documents(file_paths: List[Path]) -> Dict:
+    """
+    Ingest newly uploaded documents into the existing index.
+
+    Returns a dict with ingestion stats.
+    """
+    if not _RAG_ENABLED:
+        raise RuntimeError("RAG disabled: embedding backend not available")
+
+    embedding_client = get_embedding_client()
+    dimension = embedding_client.get_embedding_dimension()
+    vector_store = get_vector_store(dimension=dimension)
+
+    if not vector_store.is_initialized:
+        vector_store.load()
+
+    ingested_files: List[str] = []
+    skipped_files: List[str] = []
+    all_texts: List[str] = []
+    all_metadata: List[Dict] = []
+
+    for file_path in file_paths:
+        content = parse_document(file_path)
+
+        if not content:
+            skipped_files.append(file_path.name)
+            continue
+
+        chunks = chunk_text(
+            content,
+            chunk_size=settings.CHUNK_SIZE,
+            overlap=settings.CHUNK_OVERLAP
+        )
+
+        if not chunks:
+            skipped_files.append(file_path.name)
+            continue
+
+        ingested_files.append(file_path.name)
+        for index, chunk in enumerate(chunks):
+            all_texts.append(chunk)
+            all_metadata.append({
+                "source": file_path.name,
+                "chunk_index": index
+            })
+
+    if not all_texts:
+        return {
+            "ingested_files": ingested_files,
+            "skipped_files": skipped_files,
+            "chunks_added": 0,
+            "index_size": vector_store.size
+        }
+
+    embeddings_array = embedding_client.embed_texts(all_texts)
+    embeddings = embeddings_array.tolist()
+
+    vector_store.add_embeddings(embeddings, all_texts, all_metadata)
+    vector_store.save()
+
+    return {
+        "ingested_files": ingested_files,
+        "skipped_files": skipped_files,
+        "chunks_added": len(all_texts),
+        "index_size": vector_store.size
+    }

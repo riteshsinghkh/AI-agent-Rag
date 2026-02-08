@@ -5,6 +5,7 @@
 fastapi
 uvicorn[standard]
 pydantic
+python-multipart
 
 # Environment
 python-dotenv
@@ -13,13 +14,19 @@ python-dotenv
 openai
 requests
 huggingface_hub
+transformers==4.38.2
+
+# Document parsing
+pdfplumber
+python-docx
 
 # Vector DB
 faiss-cpu
 
 # Embeddings (CPU-only, from PyTorch repo)
+numpy==1.26.4
 torch==2.2.1
-sentence-transformers==2.2.2
+sentence-transformers==2.6.1
 
 # Optional
 accelerate

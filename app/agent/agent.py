@@ -3,13 +3,21 @@ Agent Decision Logic
 Implements the core AI agent that decides whether to answer directly or use RAG.
 """
 
+import json
 import logging
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 from dotenv import load_dotenv
 
-from app.agent.prompt import get_system_prompt, get_context_prompt, get_no_context_prompt
+from app.agent.prompt import get_system_prompt, get_context_prompt, get_no_context_prompt, get_structured_prompt
 from app.agent.memory import memory
-from app.rag.retriever import search_documents, format_context_for_llm, get_unique_sources
+from app.rag.retriever import (
+    search_documents,
+    format_context_for_llm,
+    get_unique_sources,
+    get_max_confidence,
+    has_index_data,
+)
+from app.config import settings
 from app.llm.factory import get_llm_client
 
 # Load environment variables
@@ -84,8 +92,56 @@ class Agent:
         messages.append({"role": "user", "content": query})
         
         return messages
-    
-    def process_query(self, query: str, session_id: Optional[str] = None) -> Tuple[str, List[str]]:
+
+    def _format_structured_output(self, data: Dict[str, Any]) -> str:
+        """Format structured JSON into readable text."""
+        lines: List[str] = []
+        for section, values in data.items():
+            title = section.replace("_", " ").title()
+            lines.append(f"**{title}:**")
+            if isinstance(values, dict):
+                for key, value in values.items():
+                    label = key.replace("_", " ").title()
+                    display = "null" if value is None else str(value)
+                    lines.append(f"- {label}: {display}")
+            elif isinstance(values, list):
+                for item in values:
+                    display = "null" if item is None else str(item)
+                    lines.append(f"- {display}")
+            else:
+                display = "null" if values is None else str(values)
+                lines.append(f"- {display}")
+            lines.append("")
+        return "\n".join(lines).strip()
+
+    def _parse_json_response(self, text: str) -> Optional[Dict[str, Any]]:
+        """Attempt to parse JSON from LLM output."""
+        if not text:
+            return None
+
+        start = text.find("{")
+        end = text.rfind("}")
+        if start == -1 or end == -1 or end <= start:
+            return None
+
+        try:
+            payload = json.loads(text[start:end + 1])
+        except json.JSONDecodeError:
+            return None
+
+        return payload if isinstance(payload, dict) else None
+
+    def _try_structured_answer(self, context: str, query: str) -> Optional[str]:
+        """Ask the LLM for structured JSON and format it deterministically."""
+        structured_prompt = get_structured_prompt(context, query)
+        messages = [{"role": "system", "content": structured_prompt}]
+        response = self._call_llm(messages, temperature=0.2)
+        parsed = self._parse_json_response(response)
+        if not parsed:
+            return None
+        return self._format_structured_output(parsed)
+
+    def process_query(self, query: str, session_id: Optional[str] = None) -> Tuple[str, List[str], List[Dict], Optional[float]]:
         """
         Process user query and return answer with sources
         
@@ -94,9 +150,11 @@ class Agent:
             session_id: Optional session identifier for memory
             
         Returns:
-            Tuple of (answer, list of source documents)
+            Tuple of (answer, list of source documents, chunks, confidence)
         """
         sources: List[str] = []
+        chunks: List[Dict] = []
+        confidence: Optional[float] = None
         
         try:
             # Step 1: Build messages with history
@@ -107,33 +165,43 @@ class Agent:
             initial_response = self._call_llm(messages, temperature=0.3)
             logger.info(f"Initial response: {initial_response[:100]}...")
             
-            # Step 3: Check if tool call is needed
-            if self._needs_tool_call(initial_response):
+            # Step 3: Decide if tool call is needed
+            force_retrieval = has_index_data()
+            use_retrieval = force_retrieval or self._needs_tool_call(initial_response)
+
+            if use_retrieval:
                 logger.info("Tool call detected - searching documents...")
                 
                 # Step 4: Call search_documents tool
-                search_results = search_documents(query, top_k=3)
+                search_results = search_documents(query, top_k=settings.TOP_K)
                 
                 if search_results:
-                    # Format context for LLM
-                    context = format_context_for_llm(search_results)
-                    sources = get_unique_sources(search_results)
-                    logger.info(f"Found {len(search_results)} chunks from {len(sources)} sources")
-                    
-                    # Step 5: Generate answer with context
-                    context_prompt = get_context_prompt(context, query)
-                    context_messages = [
-                        {"role": "system", "content": context_prompt}
-                    ]
-                    final_answer = self._call_llm(context_messages, temperature=0.5)
+                    chunks = search_results
+                    confidence = get_max_confidence(search_results)
+
+                    if should_reject_results(search_results, settings.CONFIDENCE_THRESHOLD):
+                        logger.warning("Confidence below threshold; returning not found")
+                        final_answer = "Not found in document."
+                    else:
+                        # Format context for LLM
+                        context = format_context_for_llm(search_results)
+                        sources = get_unique_sources(search_results)
+                        logger.info(f"Found {len(search_results)} chunks from {len(sources)} sources")
+
+                        # Step 5: Generate structured answer with context
+                        structured_answer = self._try_structured_answer(context, query)
+                        if structured_answer:
+                            final_answer = structured_answer
+                        else:
+                            context_prompt = get_context_prompt(context, query)
+                            context_messages = [
+                                {"role": "system", "content": context_prompt}
+                            ]
+                            final_answer = self._call_llm(context_messages, temperature=0.5)
                 else:
                     # No documents found
                     logger.warning("No relevant documents found")
-                    no_context_prompt = get_no_context_prompt(query)
-                    context_messages = [
-                        {"role": "system", "content": no_context_prompt}
-                    ]
-                    final_answer = self._call_llm(context_messages, temperature=0.5)
+                    final_answer = "Not found in document."
             else:
                 # Direct answer without tool call
                 logger.info("Answering directly without documents")
@@ -145,11 +213,18 @@ class Agent:
                 memory.add_message(session_id, "assistant", final_answer)
                 logger.info(f"Updated session memory for: {session_id}")
             
-            return final_answer, sources
+            return final_answer, sources, chunks, confidence
             
         except Exception as e:
             logger.error(f"Error processing query: {e}")
-            return f"I apologize, but I encountered an error processing your request: {str(e)}", []
+            return f"I apologize, but I encountered an error processing your request: {str(e)}", [], [], None
+
+
+def should_reject_results(results: List[Dict], threshold: float) -> bool:
+    """Return True when results should be rejected by guardrails."""
+    if not results:
+        return True
+    return get_max_confidence(results) < threshold
 
 
 # Global agent instance (lazy initialization)
@@ -164,7 +239,7 @@ def get_agent() -> Agent:
     return _agent
 
 
-def ask(query: str, session_id: Optional[str] = None) -> Tuple[str, List[str]]:
+def ask(query: str, session_id: Optional[str] = None) -> Tuple[str, List[str], List[Dict], Optional[float]]:
     """
     Convenience function to process a query
     
@@ -173,7 +248,7 @@ def ask(query: str, session_id: Optional[str] = None) -> Tuple[str, List[str]]:
         session_id: Optional session identifier
         
     Returns:
-        Tuple of (answer, list of source documents)
+        Tuple of (answer, list of source documents, chunks, confidence)
     """
     agent = get_agent()
     return agent.process_query(query, session_id)

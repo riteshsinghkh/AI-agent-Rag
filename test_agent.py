@@ -33,7 +33,7 @@ def test_direct_answer():
     
     for query in test_queries:
         print(f"\n📝 Query: {query}")
-        answer, sources = ask(query)
+        answer, sources, chunks, confidence = ask(query)
         print(f"💬 Answer: {answer[:200]}..." if len(answer) > 200 else f"💬 Answer: {answer}")
         print(f"📂 Sources: {sources}")
         
@@ -63,7 +63,7 @@ def test_document_retrieval():
     
     for query in test_queries:
         print(f"\n📝 Query: {query}")
-        answer, sources = ask(query)
+        answer, sources, chunks, confidence = ask(query)
         print(f"💬 Answer: {answer[:300]}..." if len(answer) > 300 else f"💬 Answer: {answer}")
         print(f"📂 Sources: {sources}")
         
@@ -97,7 +97,7 @@ def test_session_memory():
     
     for i, query in enumerate(conversation):
         print(f"\n📝 Query {i+1}: {query}")
-        answer, sources = ask(query, session_id=session_id)
+        answer, sources, chunks, confidence = ask(query, session_id=session_id)
         print(f"💬 Answer: {answer[:300]}..." if len(answer) > 300 else f"💬 Answer: {answer}")
         print(f"📂 Sources: {sources}")
     

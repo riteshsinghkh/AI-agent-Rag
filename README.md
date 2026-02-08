@@ -21,7 +21,7 @@ This project implements an AI agent that can:
 
 ### Fallback Providers (Active Runtime)
 Due to Azure OpenAI free subscription quota limitations (0 TPM), the system currently uses:
-- **LLM**: Hugging Face Inference API (mistralai/Mistral-7B-Instruct-v0.2)
+- **LLM**: Hugging Face Inference API (meta-llama/Llama-3.2-3B-Instruct)
 - **Embeddings**: Local SentenceTransformers (all-MiniLM-L6-v2)
 
 **Important**: Azure OpenAI integration is fully implemented and production-ready. The switch to runtime providers is purely due to quota restrictions, not architectural limitations.
@@ -35,7 +35,12 @@ app/
 │   ├── memory.py      # Session memory management
 │   └── prompt.py      # System and context prompts
 ├── api/               # FastAPI endpoints
-│   └── ask.py        # /ask endpoint
+│   ├── ask.py        # /ask endpoint
+│   ├── upload.py     # /upload endpoint
+│   └── extract.py    # /extract endpoint
+├── extraction/         # Structured extraction helpers
+│   ├── shipment.py   # Shipment field extraction
+│   └── generic.py    # Generic key/value extraction
 ├── llm/               # LLM provider abstraction
 │   ├── base.py       # Abstract LLM interface
 │   ├── azure_client.py      # Azure OpenAI client
@@ -50,6 +55,7 @@ app/
 │   ├── vectorstore.py # FAISS vector store
 │   └── retriever.py  # High-level RAG interface
 ├── config.py          # Configuration management
+├── uploads_state.py   # Latest upload tracking
 └── main.py           # FastAPI application
 data/
 └── docs/             # Document repository
@@ -76,6 +82,16 @@ AZURE_OPENAI_API_VERSION=2024-02-15-preview
 # Hugging Face Configuration (current runtime)
 HUGGINGFACE_API_KEY=your_huggingface_api_key
 HUGGINGFACE_MODEL=mistralai/Mistral-Nemo-Instruct-v1
+
+# RAG Guardrails
+CONFIDENCE_THRESHOLD=0.35
+
+# Uploads
+UPLOAD_DIR=data/uploads
+MAX_UPLOAD_MB=10
+
+# Seed docs at startup (optional)
+SEED_DOCS=false
 ```
 
 ### Provider Switching
@@ -119,10 +135,8 @@ pip install -r requirements.txt
 - Copy `.env.example` to `.env` (if exists) or create `.env`
 - Add your API keys and configuration
 
-5. **Initialize RAG system**
-```bash
-python -c "from app.rag.retriever import initialize_rag; initialize_rag()"
-```
+5. **Upload your first document**
+The index is built incrementally from uploads. If you want to seed from data/docs, set `SEED_DOCS=true`.
 
 ## Running the Application
 
@@ -132,6 +146,8 @@ uvicorn app.main:app --reload
 ```
 
 The API will be available at `http://localhost:8000`
+
+Reviewer UI: `http://localhost:8000/`
 
 ### API Documentation
 - Swagger UI: `http://localhost:8000/docs`
@@ -146,17 +162,81 @@ The API will be available at `http://localhost:8000`
 Request body:
 ```json
 {
-  "question": "What is the leave policy?",
-  "session_id": "user123"
+   "query": "What is the leave policy?",
+   "session_id": "user123"
 }
 ```
 
 Response:
 ```json
 {
-  "answer": "According to the leave policy, employees are entitled to...",
-  "sources": ["leave_policy.txt"],
-  "reasoning": "Used RAG to retrieve policy documents"
+   "answer": "According to the leave policy, employees are entitled to...",
+   "sources": ["leave_policy.txt"],
+   "chunks": [
+      {
+         "chunk": "...",
+         "source": "leave_policy.txt",
+         "chunk_index": 0,
+         "score": 0.1234,
+         "confidence": 0.89
+      }
+   ],
+   "confidence": 0.89
+}
+```
+
+### Upload Endpoint
+
+**POST** `/upload` (multipart form data)
+
+Form fields:
+- `files`: one or more TXT, PDF, or DOCX files
+
+Response:
+```json
+{
+   "stored_files": ["policy-abc123.txt"],
+   "ingested_files": ["policy-abc123.txt"],
+   "skipped_files": [],
+   "invalid_files": [],
+   "too_large_files": [],
+   "chunks_added": 3,
+   "index_size": 128
+}
+```
+
+### Extract Endpoint
+
+**POST** `/extract`
+
+Request body:
+```json
+{
+   "text": "Shipment ID: SH12345...",
+   "use_latest_upload": true
+}
+```
+
+Response:
+```json
+{
+   "text_preview": "...",
+   "key_values": [
+      {"key": "Phone", "value": "(844) 850-3391"}
+   ],
+   "shipment": {
+      "shipment_id": "SH12345",
+      "shipper": "Alpha Logistics",
+      "consignee": "Beta Retail",
+      "pickup_datetime": "2026-02-10 09:00",
+      "delivery_datetime": "2026-02-12 16:00",
+      "equipment_type": "Dry Van",
+      "mode": "Truckload",
+      "rate": "1250",
+      "currency": "USD",
+      "weight": "12000 lbs",
+      "carrier_name": "Sky Freight"
+   }
 }
 ```
 
@@ -169,33 +249,40 @@ The agent autonomously decides whether to:
 - Request additional context
 
 ### 2. Retrieval-Augmented Generation (RAG)
-- **Document Loading**: Supports .txt files from `data/docs/`
+- **Document Loading**: Supports TXT, PDF, and DOCX
 - **Chunking**: Intelligent text splitting (400 tokens, 50 overlap)
 - **Embedding**: Vector representations of text
 - **Search**: FAISS-based similarity search (L2 distance)
 - **Top-K Retrieval**: Configurable number of relevant chunks
 
-### 3. Session Memory
+### 3. Confidence Scoring and Guardrails
+- Confidence is computed from FAISS L2 distance as $confidence = \frac{1}{1 + score}$.
+- If confidence is below `CONFIDENCE_THRESHOLD`, the system returns "Not found in document." and does not call the LLM with context.
+- If no chunks are retrieved, the system returns "Not found in document.".
+
+### 4. Session Memory
 - Maintains conversation history per session
 - Configurable history limit (default: 10 messages)
 - Enables contextual follow-up questions
 
-### 4. Provider Abstraction
+### 5. Provider Abstraction
 - Clean separation between business logic and providers
 - Easy provider switching via configuration
 - Extensible to add new LLM/embedding providers
 
 ## Testing
+Tests are intentionally excluded from this repository to keep it lightweight.
 
-### Test RAG System
-```bash
-python test_rag.py
-```
+## Failure Cases
+- Unsupported uploads return `invalid_files` in the error payload.
+- Oversized uploads return `too_large_files` in the error payload.
+- Empty or unreadable documents are listed in `skipped_files`.
+- Low-confidence retrieval returns "Not found in document.".
 
-### Test Agent
-```bash
-python test_agent.py
-```
+## End-to-End Validation
+1. Upload a document with `/upload` and confirm `chunks_added` > 0.
+2. Ask a question with `/ask` and verify `sources`, `chunks`, and `confidence`.
+3. Call `/extract` with text or `use_latest_upload=true` and verify the JSON fields.
 
 ## Azure OpenAI Integration Details
 
@@ -322,7 +409,6 @@ This project fulfills all assignment requirements:
 - FAISS index needs rebuild when switching embedding providers
 
 ### Future Enhancements
-- Support for PDF, DOCX document formats
 - Advanced chunking strategies (semantic, recursive)
 - Hybrid search (keyword + vector)
 - Caching layer for embeddings

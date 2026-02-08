@@ -51,8 +51,25 @@ Thumbs.db
 *.publishsettings
 *.azurePubxml
 
-# FAISS Index (keep committed for demo, but exclude in production)
-# faiss_index.pkl
+# FAISS Index
+faiss_index.pkl
+
+# Uploaded documents and state
+data/uploads/
+app/**/.latest_uploads.json
+
+# One-off extracted text
+docx_extracted.txt
+
+# Local docs/tests and notes
+test_agent.py
+test_rag.py
+quick_test.py
+QUICKSTART.md
+QUICKSTART_TEST.md
+content.pdf
+COMPLETION_SUMMARY.md
+AZURE_OPENAI_EXPLANATION.txt
 
 # Logs
 *.log
@@ -90,3 +107,8 @@ htmlcov/
 
 # Azure
 .azure/
+README.md.backup
+Complete_Assignment_TODO_List.txt
+faiss_index.pkl
+faiss_index.pkl
+Skill Test - AI Engineer.docx

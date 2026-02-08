@@ -7,6 +7,8 @@ import os
 from typing import List, Dict
 from pathlib import Path
 
+from app.rag.parsing import parse_document, SUPPORTED_EXTENSIONS
+
 
 # Default settings (can be overridden)
 DEFAULT_CHUNK_SIZE = 400  # tokens (approx)
@@ -16,7 +18,7 @@ CHARS_PER_TOKEN = 4  # Approximate: 1 token ≈ 4 characters
 
 def load_documents(docs_dir: str = None) -> List[Dict[str, str]]:
     """
-    Load all TXT documents from the docs directory
+    Load documents from the docs directory
     
     Args:
         docs_dir: Directory containing document files (default: data/docs)
@@ -40,27 +42,26 @@ def load_documents(docs_dir: str = None) -> List[Dict[str, str]]:
         print(f"Warning: Documents directory not found: {docs_dir}")
         return documents
     
-    # Find all .txt files
-    txt_files = list(docs_dir.glob("*.txt"))
+    # Find all supported files in the directory
+    files = [p for p in docs_dir.iterdir() if p.is_file() and p.suffix.lower() in SUPPORTED_EXTENSIONS]
     
-    if not txt_files:
-        print(f"Warning: No .txt files found in {docs_dir}")
+    if not files:
+        print(f"Warning: No files found in {docs_dir}")
         return documents
     
-    # Read each file
-    for file_path in txt_files:
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-            
-            documents.append({
-                "filename": file_path.name,
-                "content": content
-            })
-            print(f"Loaded: {file_path.name} ({len(content)} chars)")
-            
-        except Exception as e:
-            print(f"Error reading {file_path.name}: {e}")
+    # Read each file as text when possible
+    for file_path in files:
+        content = parse_document(file_path)
+
+        if not content:
+            print(f"Skipping empty or unreadable file {file_path.name}")
+            continue
+
+        documents.append({
+            "filename": file_path.name,
+            "content": content
+        })
+        print(f"Loaded: {file_path.name} ({len(content)} chars)")
     
     print(f"Total documents loaded: {len(documents)}")
     return documents

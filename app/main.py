@@ -12,6 +12,9 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 
 from app.api.ask import router as ask_router
+from app.api.upload import router as upload_router
+from app.api.extract import router as extract_router
+from app.config import settings
 
 # Configure logging
 logging.basicConfig(
@@ -32,10 +35,13 @@ async def lifespan(app: FastAPI):
     
     try:
         # Initialize RAG system (build/load FAISS index)
-        from app.rag.retriever import initialize_rag
-        logger.info("Initializing RAG system...")
-        initialize_rag()
-        logger.info("RAG system initialized successfully!")
+        if settings.SEED_DOCS:
+            from app.rag.retriever import initialize_rag
+            logger.info("Initializing RAG system from seed docs...")
+            initialize_rag()
+            logger.info("RAG system initialized successfully!")
+        else:
+            logger.info("Skipping seed document indexing (SEED_DOCS=false)")
     except Exception as e:
         logger.error(f"Failed to initialize RAG system: {e}")
         logger.warning("API will start but RAG may not work properly")
@@ -82,6 +88,8 @@ app.add_middleware(
 
 # Include API routers
 app.include_router(ask_router, tags=["Agent"])
+app.include_router(upload_router, tags=["Documents"])
+app.include_router(extract_router, tags=["Extract"])
 
 # Mount static files for UI
 static_path = Path(__file__).parent / "static"

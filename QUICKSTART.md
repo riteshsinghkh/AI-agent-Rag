@@ -21,13 +21,25 @@ uvicorn app.main:app --reload
 ```
 
 Then open: http://localhost:8000/docs
+Reviewer UI: http://localhost:8000/
 
 ## Test API
 
 ```bash
 curl -X POST "http://localhost:8000/ask" \
   -H "Content-Type: application/json" \
-  -d '{"question": "What is the leave policy?", "session_id": "user123"}'
+  -d '{"query": "What is the leave policy?", "session_id": "user123"}'
+```
+
+```bash
+curl -X POST "http://localhost:8000/extract" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Shipment ID: SH12345"}'
+```
+
+```bash
+curl -X POST "http://localhost:8000/upload" \
+  -F "files=@data/docs/leave_policy.txt"
 ```
 
 ## Switch to Azure OpenAI (When Quota Available)

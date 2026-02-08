@@ -43,6 +43,19 @@ class QueryRequest(BaseModel):
         }
 
 
+class ErrorResponse(BaseModel):
+    """Error response model"""
+    detail: str = Field(..., description="Error message")
+
+
+class ChunkResult(BaseModel):
+    """Retrieved chunk with metadata and scores"""
+    chunk: str = Field(..., description="Chunk text")
+    source: str = Field(..., description="Source filename")
+    chunk_index: int = Field(..., description="Chunk index within the source")
+    score: float = Field(..., description="Similarity score (lower is better)")
+    confidence: float = Field(..., description="Confidence score")
+
 class QueryResponse(BaseModel):
     """Response model for /ask endpoint"""
     answer: str = Field(
@@ -53,6 +66,14 @@ class QueryResponse(BaseModel):
         default=[],
         description="List of source documents used (if any)"
     )
+    chunks: List[ChunkResult] = Field(
+        default=[],
+        description="Retrieved chunks with metadata"
+    )
+    confidence: Optional[float] = Field(
+        default=None,
+        description="Similarity-based confidence score"
+    )
     
     class Config:
         json_schema_extra = {
@@ -61,11 +82,6 @@ class QueryResponse(BaseModel):
                 "sources": ["leave_policy.txt"]
             }
         }
-
-
-class ErrorResponse(BaseModel):
-    """Error response model"""
-    detail: str = Field(..., description="Error message")
 
 
 # =============================================================================
@@ -122,13 +138,15 @@ async def ask_question(request: QueryRequest) -> QueryResponse:
         from app.agent.agent import ask
         
         # Process query through agent
-        answer, sources = ask(query, session_id=request.session_id)
+        answer, sources, chunks, confidence = ask(query, session_id=request.session_id)
         
         logger.info(f"Generated answer ({len(answer)} chars), sources: {sources}")
         
         return QueryResponse(
             answer=answer,
-            sources=sources
+            sources=sources,
+            chunks=chunks,
+            confidence=confidence
         )
         
     except ImportError as e:
