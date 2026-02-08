@@ -95,22 +95,59 @@ class Agent:
 
     def _format_structured_output(self, data: Dict[str, Any]) -> str:
         """Format structured JSON into readable text."""
+        def normalize_label(value: str) -> str:
+            return value.replace("_", " ").title()
+
+        def format_scalar(value: Any) -> str:
+            return "null" if value is None else str(value)
+
+        def format_list_of_dicts(key: str, items: List[Dict[str, Any]]) -> str:
+            singular = key[:-1] if key.endswith("s") and len(key) > 1 else "Item"
+            singular_label = normalize_label(singular)
+            parts = []
+            for idx, item in enumerate(items, 1):
+                parts.append(f"{singular_label} {idx}: {flatten_dict(item)}")
+            return "; ".join(parts)
+
+        def flatten_dict(values: Dict[str, Any]) -> str:
+            parts = []
+            for key, value in values.items():
+                label = normalize_label(key)
+                if isinstance(value, dict):
+                    parts.append(f"{label}: {flatten_dict(value)}")
+                elif isinstance(value, list) and value and all(isinstance(item, dict) for item in value):
+                    parts.append(f"{label}: {format_list_of_dicts(key, value)}")
+                elif isinstance(value, list):
+                    items = ", ".join(format_scalar(item) for item in value) if value else "[]"
+                    parts.append(f"{label}: {items}")
+                else:
+                    parts.append(f"{label}: {format_scalar(value)}")
+            return " | ".join(parts)
+
         lines: List[str] = []
         for section, values in data.items():
-            title = section.replace("_", " ").title()
+            title = normalize_label(section)
             lines.append(f"**{title}:**")
             if isinstance(values, dict):
                 for key, value in values.items():
-                    label = key.replace("_", " ").title()
-                    display = "null" if value is None else str(value)
-                    lines.append(f"- {label}: {display}")
+                    label = normalize_label(key)
+                    if isinstance(value, dict):
+                        lines.append(f"- {label}: {flatten_dict(value)}")
+                    elif isinstance(value, list) and value and all(isinstance(item, dict) for item in value):
+                        lines.append(f"- {label}: {format_list_of_dicts(key, value)}")
+                    elif isinstance(value, list):
+                        items = ", ".join(format_scalar(item) for item in value) if value else "[]"
+                        lines.append(f"- {label}: {items}")
+                    else:
+                        lines.append(f"- {label}: {format_scalar(value)}")
+            elif isinstance(values, list) and values and all(isinstance(item, dict) for item in values):
+                for idx, item in enumerate(values, 1):
+                    lines.append(f"- Item {idx}: {flatten_dict(item)}")
             elif isinstance(values, list):
                 for item in values:
-                    display = "null" if item is None else str(item)
-                    lines.append(f"- {display}")
+                    lines.append(f"- {format_scalar(item)}")
             else:
-                display = "null" if values is None else str(values)
-                lines.append(f"- {display}")
+                lines.append(f"- {format_scalar(values)}")
             lines.append("")
         return "\n".join(lines).strip()
 
