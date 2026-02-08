@@ -333,7 +333,12 @@
     </div>
 
     <script>
-        const API_BASE = window.location.origin;
+        const API_BASE = (() => {
+            const queryBase = new URLSearchParams(window.location.search).get('apiBase');
+            const windowBase = window.DOCMIND_API_BASE || window.DOCMIND_API_URL;
+            const resolved = windowBase || queryBase || window.location.origin;
+            return resolved.replace(/\/$/, '');
+        })();
         const API_URL = `${API_BASE}/ask`;
         const UPLOAD_URL = `${API_BASE}/upload`;
         const EXTRACT_URL = `${API_BASE}/extract`;
