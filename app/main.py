@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from pathlib import Path
 
 from app.api.ask import router as ask_router
@@ -126,3 +126,9 @@ async def root():
         "health": "/health",
         "ask": "POST /ask"
     }
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Return an empty favicon response to avoid browser 404 noise."""
+    return Response(status_code=204)

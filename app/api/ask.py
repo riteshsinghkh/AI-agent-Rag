@@ -33,6 +33,10 @@ class QueryRequest(BaseModel):
         description="Optional session ID for conversation memory",
         examples=["user-123-session-1"]
     )
+    use_latest_uploads_only: Optional[bool] = Field(
+        default=None,
+        description="If true, restrict retrieval to latest uploaded files only"
+    )
     
     class Config:
         json_schema_extra = {
@@ -138,7 +142,11 @@ async def ask_question(request: QueryRequest) -> QueryResponse:
         from app.agent.agent import ask
         
         # Process query through agent
-        answer, sources, chunks, confidence = ask(query, session_id=request.session_id)
+        answer, sources, chunks, confidence = ask(
+            query,
+            session_id=request.session_id,
+            use_latest_uploads_only=request.use_latest_uploads_only,
+        )
         
         logger.info(f"Generated answer ({len(answer)} chars), sources: {sources}")
         

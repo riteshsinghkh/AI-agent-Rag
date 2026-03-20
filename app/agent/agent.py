@@ -5,10 +5,12 @@ Implements the core AI agent that decides whether to answer directly or use RAG.
 
 import json
 import logging
+import re
+from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any
 from dotenv import load_dotenv
 
-from app.agent.prompt import get_system_prompt, get_context_prompt, get_no_context_prompt, get_structured_prompt
+from app.agent.prompt import get_system_prompt, get_context_prompt, get_structured_prompt
 from app.agent.memory import memory
 from app.rag.retriever import (
     search_documents,
@@ -16,6 +18,8 @@ from app.rag.retriever import (
     get_unique_sources,
     get_max_confidence,
     has_index_data,
+    list_latest_uploaded_documents,
+    get_all_chunks_for_source,
 )
 from app.config import settings
 from app.llm.factory import get_llm_client
@@ -26,6 +30,11 @@ load_dotenv()
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+_DESCRIBE_INTENTS = re.compile(
+    r"\b(describe|summarize|summary|what'?s?\s+in|tell\s+me\s+about|show\s+me|explain|overview)\b",
+    re.IGNORECASE,
+)
 
 
 class Agent:
@@ -178,7 +187,118 @@ class Agent:
             return None
         return self._format_structured_output(parsed)
 
-    def process_query(self, query: str, session_id: Optional[str] = None) -> Tuple[str, List[str], List[Dict], Optional[float]]:
+    def _is_list_uploaded_documents_query(self, query: str) -> bool:
+        """Detect requests that ask to list or describe ALL uploaded documents."""
+        lowered = query.lower().strip()
+        patterns = [
+            r"\ball uploaded documents\b",
+            r"\buploaded documents\b",
+            r"\bwhat( are|'re| is)?\s+(all\s+)?the\s+uploaded\s+documents\b",
+            r"\blist\s+(all\s+)?uploaded\s+(files|documents)\b",
+            r"\bshow\s+(all\s+)?uploaded\s+(files|documents)\b",
+            r"\bdescribe\s+(all\s+)?(the\s+)?uploaded\s+(files|documents)\b",
+            r"\bwhat\s+(files|documents)\s+(have\s+been\s+|are\s+|were\s+)?uploaded\b",
+            r"\bwhat\s+documents\s+(are|were)\s+uploaded\b",
+        ]
+        return any(re.search(pattern, lowered) for pattern in patterns)
+
+    def _detect_target_document(self, query: str) -> Optional[str]:
+        """Fuzzy-match query keywords against latest uploaded filenames. Returns filename or None."""
+        documents = list_latest_uploaded_documents()
+        if not documents:
+            return None
+
+        query_lower = query.lower()
+        query_words = [w for w in re.split(r"\W+", query_lower) if len(w) > 2]
+
+        best_match: Optional[str] = None
+        best_score = 0
+
+        for doc in documents:
+            name = doc["name"]
+            # Strip UUID suffix (32 hex chars) and extension, then normalize
+            stem = Path(name).stem
+            clean_stem = re.sub(r"-[0-9a-f]{32}$", "", stem, flags=re.IGNORECASE)
+            clean_stem = re.sub(r"[\s_\-\(\)]+", " ", clean_stem).lower().strip()
+
+            doc_words = [w for w in clean_stem.split() if len(w) > 2]
+            # Forward: doc keywords found in query; reverse: query keywords found in doc name
+            forward = sum(1 for w in doc_words if w in query_lower)
+            reverse = sum(1 for w in query_words if w in clean_stem)
+            score = forward + reverse
+
+            if score > best_score:
+                best_score = score
+                best_match = name
+
+        return best_match if best_score >= 1 else None
+
+    def _detect_single_document_describe_query(self, query: str) -> Optional[str]:
+        """Return matched filename when query asks to describe a specific document."""
+        if not _DESCRIBE_INTENTS.search(query):
+            return None
+        return self._detect_target_document(query)
+
+    def _build_single_document_answer(
+        self, target_source: str, query: str
+    ) -> Tuple[str, List[str], List[Dict], Optional[float]]:
+        """Retrieve all indexed chunks for a specific document and generate an LLM description."""
+        doc_chunks = get_all_chunks_for_source(target_source)
+        if not doc_chunks:
+            return f"No indexed content found for document: {target_source}", [], [], None
+
+        context = f"[Document: {target_source}]\n" + "\n\n---\n\n".join(doc_chunks)
+        context_prompt = get_context_prompt(context, query)
+        messages = [{"role": "system", "content": context_prompt}]
+        answer = self._call_llm(messages, temperature=0.5)
+        return answer, [target_source], [], None
+
+    def _build_uploaded_documents_answer(self) -> Tuple[str, List[str], List[Dict], Optional[float]]:
+        """Generate LLM descriptions for all latest uploaded documents."""
+        documents = list_latest_uploaded_documents()
+        if not documents:
+            return "No uploaded documents found.", [], [], None
+
+        sources = [doc["name"] for doc in documents]
+
+        # Build full context with all documents labelled
+        context_parts = []
+        for doc in documents:
+            doc_chunks = get_all_chunks_for_source(doc["name"])
+            if doc_chunks:
+                context_parts.append(
+                    f"[Document: {doc['name']}]\n" + "\n---\n".join(doc_chunks)
+                )
+            else:
+                context_parts.append(
+                    f"[Document: {doc['name']}]\n{doc.get('preview', 'No content available.')}"
+                )
+
+        context = "\n\n=====\n\n".join(context_parts)
+        describe_query = (
+            "For each of the uploaded documents listed above, provide: its name, purpose, "
+            "and a clear summary of its key contents in 2-4 sentences."
+        )
+        context_prompt = get_context_prompt(context, describe_query)
+        messages = [{"role": "system", "content": context_prompt}]
+
+        try:
+            answer = self._call_llm(messages, temperature=0.3)
+        except Exception:
+            # Fallback to simple list if LLM fails
+            lines = ["Here are your uploaded documents:"]
+            for idx, doc in enumerate(documents, 1):
+                lines.append(f"\n{idx}. **{doc['name']}**\n   {doc['preview']}")
+            answer = "\n".join(lines)
+
+        return answer, sources, [], None
+
+    def process_query(
+        self,
+        query: str,
+        session_id: Optional[str] = None,
+        use_latest_uploads_only: Optional[bool] = None,
+    ) -> Tuple[str, List[str], List[Dict], Optional[float]]:
         """
         Process user query and return answer with sources
         
@@ -194,55 +314,70 @@ class Agent:
         confidence: Optional[float] = None
         
         try:
-            # Step 1: Build messages with history
-            messages = self._build_messages(query, session_id)
             logger.info(f"Processing query: {query[:50]}...")
-            
-            # Step 2: First LLM call - decide if tool is needed
-            initial_response = self._call_llm(messages, temperature=0.3)
-            logger.info(f"Initial response: {initial_response[:100]}...")
-            
-            # Step 3: Decide if tool call is needed
-            force_retrieval = has_index_data()
-            use_retrieval = force_retrieval or self._needs_tool_call(initial_response)
 
-            if use_retrieval:
-                logger.info("Tool call detected - searching documents...")
-                
-                # Step 4: Call search_documents tool
-                search_results = search_documents(query, top_k=settings.TOP_K)
-                
-                if search_results:
-                    chunks = search_results
-                    confidence = get_max_confidence(search_results)
-
-                    if should_reject_results(search_results, settings.CONFIDENCE_THRESHOLD):
-                        logger.warning("Confidence below threshold; returning not found")
-                        final_answer = "Not found in document."
-                    else:
-                        # Format context for LLM
-                        context = format_context_for_llm(search_results)
-                        sources = get_unique_sources(search_results)
-                        logger.info(f"Found {len(search_results)} chunks from {len(sources)} sources")
-
-                        # Step 5: Generate structured answer with context
-                        structured_answer = self._try_structured_answer(context, query)
-                        if structured_answer:
-                            final_answer = structured_answer
-                        else:
-                            context_prompt = get_context_prompt(context, query)
-                            context_messages = [
-                                {"role": "system", "content": context_prompt}
-                            ]
-                            final_answer = self._call_llm(context_messages, temperature=0.5)
-                else:
-                    # No documents found
-                    logger.warning("No relevant documents found")
-                    final_answer = "Not found in document."
+            # Fast path: avoid semantic top-k omission for document listing/description.
+            if self._is_list_uploaded_documents_query(query):
+                logger.info("Detected all-uploaded-documents query")
+                final_answer, sources, chunks, confidence = self._build_uploaded_documents_answer()
+            elif (target_doc := self._detect_single_document_describe_query(query)) is not None:
+                logger.info("Detected single-document describe query for: %s", target_doc)
+                final_answer, sources, chunks, confidence = self._build_single_document_answer(
+                    target_doc, query
+                )
             else:
-                # Direct answer without tool call
-                logger.info("Answering directly without documents")
-                final_answer = initial_response
+                # Step 1: Build messages with history
+                messages = self._build_messages(query, session_id)
+
+                # Step 2: First LLM call - decide if tool is needed
+                initial_response = self._call_llm(messages, temperature=0.3)
+                logger.info(f"Initial response: {initial_response[:100]}...")
+
+                # Step 3: Decide if tool call is needed
+                force_retrieval = has_index_data()
+                use_retrieval = force_retrieval or self._needs_tool_call(initial_response)
+
+                if use_retrieval:
+                    logger.info("Tool call detected - searching documents...")
+
+                    # Step 4: Call search_documents tool
+                    search_results = search_documents(
+                        query,
+                        top_k=settings.TOP_K,
+                        restrict_to_latest_uploads=use_latest_uploads_only,
+                    )
+
+                    if search_results:
+                        chunks = search_results
+                        confidence = get_max_confidence(search_results)
+
+                        if should_reject_results(search_results, settings.CONFIDENCE_THRESHOLD):
+                            logger.warning("Confidence below threshold; returning not found")
+                            final_answer = "Not found in document."
+                        else:
+                            # Format context for LLM
+                            context = format_context_for_llm(search_results)
+                            sources = get_unique_sources(search_results)
+                            logger.info(f"Found {len(search_results)} chunks from {len(sources)} sources")
+
+                            # Step 5: Generate structured answer with context
+                            structured_answer = self._try_structured_answer(context, query)
+                            if structured_answer:
+                                final_answer = structured_answer
+                            else:
+                                context_prompt = get_context_prompt(context, query)
+                                context_messages = [
+                                    {"role": "system", "content": context_prompt}
+                                ]
+                                final_answer = self._call_llm(context_messages, temperature=0.5)
+                    else:
+                        # No documents found
+                        logger.warning("No relevant documents found")
+                        final_answer = "Not found in document."
+                else:
+                    # Direct answer without tool call
+                    logger.info("Answering directly without documents")
+                    final_answer = initial_response
             
             # Step 6: Update session memory
             if session_id:
@@ -276,7 +411,11 @@ def get_agent() -> Agent:
     return _agent
 
 
-def ask(query: str, session_id: Optional[str] = None) -> Tuple[str, List[str], List[Dict], Optional[float]]:
+def ask(
+    query: str,
+    session_id: Optional[str] = None,
+    use_latest_uploads_only: Optional[bool] = None,
+) -> Tuple[str, List[str], List[Dict], Optional[float]]:
     """
     Convenience function to process a query
     
@@ -288,4 +427,8 @@ def ask(query: str, session_id: Optional[str] = None) -> Tuple[str, List[str], L
         Tuple of (answer, list of source documents, chunks, confidence)
     """
     agent = get_agent()
-    return agent.process_query(query, session_id)
+    return agent.process_query(
+        query,
+        session_id=session_id,
+        use_latest_uploads_only=use_latest_uploads_only,
+    )

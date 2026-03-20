@@ -7,7 +7,11 @@ import faiss
 import numpy as np
 from typing import List, Dict, Optional
 import pickle
+import logging
 from pathlib import Path
+
+
+logger = logging.getLogger(__name__)
 
 
 class VectorStore:
@@ -47,7 +51,11 @@ class VectorStore:
         
         # Verify dimensions
         if embeddings_array.shape[1] != self.dimension:
-            print(f"Warning: Embedding dimension {embeddings_array.shape[1]} differs from expected {self.dimension}")
+            logger.warning(
+                "Embedding dimension %s differs from expected %s; using detected value",
+                embeddings_array.shape[1],
+                self.dimension,
+            )
             self.dimension = embeddings_array.shape[1]
         
         # Create FAISS index (L2 distance)
@@ -61,7 +69,7 @@ class VectorStore:
         self.metadata = list(metadata)
         self._is_initialized = True
         
-        print(f"Created FAISS index with {len(embeddings)} vectors (dim={self.dimension})")
+        logger.info("Created FAISS index with %s vectors (dim=%s)", len(embeddings), self.dimension)
     
     def add_embeddings(self, embeddings: List[List[float]], chunks: List[str], metadata: List[Dict]):
         """
@@ -91,7 +99,7 @@ class VectorStore:
         self.chunks.extend(chunks)
         self.metadata.extend(metadata)
         
-        print(f"Added {len(embeddings)} vectors. Total: {self.index.ntotal}")
+        logger.info("Added %s vectors to FAISS index. Total vectors: %s", len(embeddings), self.index.ntotal)
     
     def search(self, query_embedding: List[float], top_k: int = 3) -> List[Dict]:
         """
@@ -149,6 +157,7 @@ class VectorStore:
             current_file = Path(__file__).resolve()
             project_root = current_file.parent.parent.parent
             filepath = project_root / "faiss_index.pkl"
+        filepath = Path(filepath)
         
         # Prepare data for saving
         save_data = {
@@ -161,7 +170,7 @@ class VectorStore:
         with open(filepath, "wb") as f:
             pickle.dump(save_data, f)
         
-        print(f"Saved vector store to {filepath}")
+        logger.info("Saved vector store to %s", filepath)
     
     def load(self, filepath: str = None) -> bool:
         """
@@ -182,7 +191,7 @@ class VectorStore:
         filepath = Path(filepath)
         
         if not filepath.exists():
-            print(f"No saved index found at {filepath}")
+            logger.info("No saved index found at %s", filepath)
             return False
         
         try:
@@ -195,12 +204,12 @@ class VectorStore:
             self.index = faiss.deserialize_index(save_data["index_data"])
             self._is_initialized = True
             
-            print(f"Loaded vector store from {filepath}")
-            print(f"  Vectors: {self.index.ntotal}, Dimension: {self.dimension}")
+            logger.info("Loaded vector store from %s", filepath)
+            logger.info("Vector store stats: vectors=%s, dimension=%s", self.index.ntotal, self.dimension)
             return True
             
         except (FileNotFoundError, pickle.UnpicklingError, ValueError) as e:
-            print(f"Error loading vector store: {e}")
+            logger.error("Error loading vector store: %s", e)
             return False
     
     @property

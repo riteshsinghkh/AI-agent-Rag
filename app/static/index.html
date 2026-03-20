@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocMind AI</title>
     <script>
-        window.DOCMIND_API_BASE = "https://ritesh-ai-agent-rag.azurewebsites.net";
+        // Keep empty for local dev. Set this in deployment if API is hosted elsewhere.
+        window.DOCMIND_API_BASE = "";
     </script>
     <style>
         * {
@@ -303,7 +304,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>DocMind AI</h1>
+            <h1>Ultra Doc-Intelligence</h1>
             <p>Smart Document Reasoning</p>
         </div>
 
@@ -337,10 +338,38 @@
 
     <script>
         const API_BASE = (() => {
-            const queryBase = new URLSearchParams(window.location.search).get('apiBase');
+            const params = new URLSearchParams(window.location.search);
+            const queryBase = params.get('apiBase');
             const windowBase = window.DOCMIND_API_BASE || window.DOCMIND_API_URL;
-            const resolved = windowBase || queryBase || window.location.origin;
-            return resolved.replace(/\/$/, '');
+            const currentOrigin = window.location.origin;
+            const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+            const forceRemote = params.get('forceRemoteApi') === '1';
+
+            function normalizeBase(value) {
+                if (!value) return null;
+                const trimmed = String(value).trim();
+                if (!trimmed) return null;
+
+                try {
+                    const parsed = new URL(trimmed, currentOrigin);
+                    if (!['http:', 'https:'].includes(parsed.protocol)) {
+                        return null;
+                    }
+                    return parsed.origin.replace(/\/$/, '');
+                } catch {
+                    return null;
+                }
+            }
+
+            const queryCandidate = normalizeBase(queryBase);
+            const windowCandidate = normalizeBase(windowBase);
+
+            // During local development, default to same-origin to avoid stale remote hosts.
+            if (isLocalHost && !forceRemote) {
+                return currentOrigin.replace(/\/$/, '');
+            }
+
+            return (queryCandidate || windowCandidate || currentOrigin).replace(/\/$/, '');
         })();
         const API_URL = `${API_BASE}/ask`;
         const UPLOAD_URL = `${API_BASE}/upload`;

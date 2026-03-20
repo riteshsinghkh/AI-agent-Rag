@@ -5,6 +5,7 @@ Uses MiniLM for fast, local embeddings without Azure quota restrictions.
 
 import logging
 import numpy as np
+import torch
 from typing import List
 from sentence_transformers import SentenceTransformer
 
@@ -23,12 +24,13 @@ class LocalEmbeddingClient(EmbeddingClient):
         Args:
             model_name: Hugging Face model identifier
         """
-        logger.info(f"Initializing local embedding model: {model_name}")
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        logger.info("Initializing local embedding model: %s (device=%s)", model_name, self.device)
         try:
-            self.model = SentenceTransformer(model_name)
+            self.model = SentenceTransformer(model_name, device=self.device)
             self.model_name = model_name
             self.embedding_dim = self.model.get_sentence_embedding_dimension()
-            logger.info(f"Local embedding model loaded. Dimension: {self.embedding_dim}")
+            logger.info("Local embedding model loaded. Dimension: %s, Device: %s", self.embedding_dim, self.device)
         except Exception as e:
             logger.error(f"Failed to load embedding model: {e}")
             raise
@@ -45,7 +47,7 @@ class LocalEmbeddingClient(EmbeddingClient):
         """
         try:
             # Generate embeddings
-            embeddings = self.model.encode(texts, convert_to_numpy=True)
+            embeddings = self.model.encode(texts, convert_to_numpy=True, device=self.device, batch_size=64)
             
             # Ensure float32 dtype
             return embeddings.astype("float32")

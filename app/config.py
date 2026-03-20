@@ -32,6 +32,7 @@ class Settings:
     # Uploads
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "data/uploads")
     MAX_UPLOAD_MB: int = int(os.getenv("MAX_UPLOAD_MB", "10"))
+    ASK_USE_LATEST_UPLOADS_ONLY: bool = os.getenv("ASK_USE_LATEST_UPLOADS_ONLY", "true").strip().lower() in {"1", "true", "yes"}
     
     # Session Memory Configuration
     MAX_HISTORY_MESSAGES: int = 10

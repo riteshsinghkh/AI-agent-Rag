@@ -89,6 +89,7 @@ CONFIDENCE_THRESHOLD=0.35
 # Uploads
 UPLOAD_DIR=data/uploads
 MAX_UPLOAD_MB=10
+ASK_USE_LATEST_UPLOADS_ONLY=true
 
 # Seed docs at startup (optional)
 SEED_DOCS=false
@@ -163,9 +164,13 @@ Request body:
 ```json
 {
    "query": "What is the leave policy?",
-   "session_id": "user123"
+   "session_id": "user123",
+   "use_latest_uploads_only": true
 }
 ```
+
+When `ASK_USE_LATEST_UPLOADS_ONLY=true` (default), `/ask` searches only within the latest uploaded file batch tracked in `data/uploads/.latest_uploads.json`.
+Set `use_latest_uploads_only` per request to override this behavior.
 
 Response:
 ```json
